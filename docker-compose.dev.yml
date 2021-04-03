@@ -1,0 +1,46 @@
+version: "3"
+services:
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - /data/stroikaSro/local/db:/data/db
+
+  mongoExpress:
+    image: mongo-express
+    ports:
+      - "8081:8081"
+      
+  core:
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./core
+    restart: always
+    volumes:
+      - ./core:/app
+      - /app/node_modules
+      - /data/stroikasro/local/files:/data/storage
+    depends_on:
+      - mongo
+    environment:
+      - NODE_ENV=local
+    ports:
+      - "4001:4001"
+
+  client:
+    stdin_open: true
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./webclient
+    volumes:
+    - ./webclient:/app
+    - /app/node_modules
+    ports:
+      - "4000:3000"
+
+
+networks:
+  default:
+    external:
+      name: stroikasro_network
