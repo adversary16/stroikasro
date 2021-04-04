@@ -7,11 +7,10 @@
   
   .link{
     display: inline-block;
-    height: 3rem;
+    height: 4rem;
     color: var(--white);
-    background-color: var(--primary);
     font-weight: bold;
-    line-height: 3rem;
+    line-height: 4rem;
     margin: auto 0;
     padding: 0 1rem;
     text-decoration: none;
@@ -26,11 +25,5 @@
       color: var(--white);
       background-color: var(--secondary);
     }
-  }
-  .link:first-child{
-    border-radius: var(--left-borders)
-  }
-  .link:last-child{
-    border-radius: var(--right-borders)
   }
 }

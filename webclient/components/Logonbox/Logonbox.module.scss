@@ -1,0 +1,10 @@
+.logonbox_root{
+  .icon{
+    content: var(--key);
+    background: linear-gradient(rgba(0,80,0, 1), green);
+    height: 4rem;
+    width: 4rem;
+    padding: 1rem;
+    color: var(--white);
+  }
+}
