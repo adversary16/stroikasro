@@ -2,7 +2,7 @@ const navStructure = {
   'main': {
     alias: 'Главная',
     isIndex: true,
-    subdirs: {
+    childPages: {
       'news': {alias: 'Новости'},
       'checks': {alias: 'Проверки'},
     },
