@@ -1,7 +1,7 @@
 body {
     height: fit-content;
     min-height: 100vh;
-    font-family: 'Roboto Light', 'Roboto Medium', 'Roboto';
+    font-family: "Segoe UI","Helvetica Neue","Helvetica",Arial,sans-serif;
     font-size: 14px;
     position: absolute;
     width: 100%;

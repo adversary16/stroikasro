@@ -1,6 +1,7 @@
 const navStructure = {
   'main': {
     alias: 'Главная',
+    isIndex: true,
   },
   'about': {
     alias: 'Об ассоциации',

@@ -1,9 +1,10 @@
 import React from 'react';
 import styles from './Header.module.scss';
+import Navbar from './Navbar';
 
 const Header = () => {
   return <div className={styles.headerWrapper}>
-    i am a header
+    <Navbar/>
   </div>;
 };
 

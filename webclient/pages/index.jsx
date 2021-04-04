@@ -3,10 +3,8 @@ import BasicContainer from '../containers/BasicContainer';
 
 const HomePage = () => {
   const x = 'test';
-  return <BasicContainer>
-    <Header/>
-    <div>
+  return <div>
   hello
-    </div></BasicContainer>;
+  </div>;
 };
 export default HomePage;
