@@ -3,7 +3,11 @@ import React from 'react';
 const RouterContext = React.createContext({});
 
 const RouterContextProvider = ({children}) => {
-  const {asPath} = useRouter();
+  const router = useRouter();
+  const {
+    asPath,
+    content,
+  } = router;
   const value = {
     asPath,
   };

@@ -5,7 +5,6 @@ import {RouterContext} from '../../contexts/RouterContext';
 
 const ContentPage = () => {
   const {asPath} = useContext(RouterContext);
-  console.log(asPath);
   return <>
     <ContentBlock {...{asPath}}/>
   </>;

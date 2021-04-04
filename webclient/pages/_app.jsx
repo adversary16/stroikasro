@@ -5,14 +5,16 @@ import '../styles/styles.css';
 import BasicContainer from '../containers/BasicContainer';
 import Header from '../components/Header/Header';
 import {RouterContextProvider} from '../contexts/RouterContext';
+import Sidebar from '../components/Sidebar/Sidebar';
 
 const MyApp = ({Component, pageProps}) => {
   return (
     <RouterContextProvider>
+      <Header/>
       <BasicContainer>
-        <Header/>
         <Component {...pageProps}/>
       </BasicContainer>
+      <Sidebar/>
     </RouterContextProvider>
   );
 };

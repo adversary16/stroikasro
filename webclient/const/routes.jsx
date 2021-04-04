@@ -2,6 +2,10 @@ const navStructure = {
   'main': {
     alias: 'Главная',
     isIndex: true,
+    subdirs: {
+      'news': {alias: 'Новости'},
+      'checks': {alias: 'Проверки'},
+    },
   },
   'about': {
     alias: 'Об ассоциации',

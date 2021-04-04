@@ -16,15 +16,20 @@
     padding: 0 1rem;
     text-decoration: none;
 
-    &:hover, &.current{
+    &.current{
       background-color: var(--white);
       color: var(--primary)
     }
+
+    &:hover{
+      color: var(--white);
+      background-color: var(--secondary);
+    }
   }
   .link:first-child{
-    border-radius: 0.5rem 0 0 0.5rem  ;
+    border-radius: var(--left-borders)
   }
   .link:last-child{
-    border-radius: 0 0.5rem 0.5rem 0;
+    border-radius: var(--right-borders)
   }
 }
