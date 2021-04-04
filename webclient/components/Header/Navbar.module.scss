@@ -18,7 +18,8 @@
 
     &.current{
       background-color: var(--white);
-      color: var(--primary)
+      color: var(--primary);
+      border-bottom: solid 0.2rem var(--red);
     }
 
     &:hover{

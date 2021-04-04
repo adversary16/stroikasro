@@ -4,7 +4,6 @@ import styles from './SideNavMenu.module.scss';
 
 const SideNavMenu = (props) => {
   const {childPages} = props;
-  console.log(childPages);
   return <div className={styles.sideNavMenu_root}>
     {Object.keys(childPages).map((item) => <a href={`${item}`} key={v4()}>
       {childPages[item].alias}

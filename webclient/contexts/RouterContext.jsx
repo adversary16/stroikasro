@@ -1,5 +1,5 @@
 import {Router, useRouter} from 'next/dist/client/router';
-import React from 'react';
+import React, {useEffect} from 'react';
 import navStructure from '../const/routes';
 const RouterContext = React.createContext({});
 
@@ -14,6 +14,7 @@ const RouterContextProvider = ({children}) => {
   , [])[0];
   const asPath = rawAsPath.split('/')[1];
   const {childPages} = navStructure[asPath] || {};
+
   const value = {
     asPath,
     childPages,

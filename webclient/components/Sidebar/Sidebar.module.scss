@@ -2,4 +2,40 @@
   display: flex;
   flex-direction: column;
   grid-area:side;
+  width: 80%;
+  max-width: 12rem;
+  margin: 0 auto;
+
+  .header{
+    display: block;
+    width: 100%;
+    background-color: var(--primary);
+    margin: 0 auto;
+    border-radius: var(--top-borders);
+    height: 2rem;
+    line-height: 2rem;
+    padding: 0 1rem;
+    font-weight: 400;
+    color: var(--white)
+  }
+  .block {
+    box-shadow: 0 0 1rem var(--secondary);
+    &::after {
+      content: '';
+      display: block;
+      height: 1rem;
+      margin: 0;
+      padding: 0;
+      background-color: var(--primary);
+      border-radius: var(--bottom-borders);
+    }
+    display: block;
+    margin: 1rem 0;
+    div {
+      border: solid 1px var(--secondary);
+      &.content {
+        padding: 1.2rem;
+      }
+    }
+  }
 }
