@@ -1,0 +1,49 @@
+body {
+    height: fit-content;
+    min-height: 100vh;
+    font-family: 'Roboto Light', 'Roboto Medium', 'Roboto';
+    font-size: 14px;
+    position: absolute;
+    width: 100%;
+    margin: 0;
+}
+
+textarea {
+    resize: none;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    height: fit-content;
+    box-sizing: border-box;
+}
+
+#__next {
+    min-height: 100%;
+    height: fit-content;
+    position: absolute;
+    width: 100%;
+}
+
+.Dropdown-placeholder {
+    padding-left: 10px;
+}
+
+.Dropdown-arrow-wrapper {
+    display: none;
+}
+
+.previous {
+    transform: rotate(90deg);
+}
+
+.next {
+    transform: rotate(-90deg);
+}
+
+.playIcon {
+    transform: translate(2px, 1px);
+}

@@ -1,0 +1,24 @@
+:root {
+    --white: #fff;
+    --black: #222222;
+    --red: #ff3e00;
+    --redForButton: #ff5721;
+    --primary: #0a6fb8;
+    --orange: rgba(255, 191, 37, 0.8);
+    --orange-in-app: #F86826;
+    --yellow: #ffbf25;
+    --blue-light: #e7f1f8;
+    --gray: rgba(136, 136, 136, 0.34);
+    --gray-light: rgba(34, 34, 34, 0.2);
+    --gray-very-light: rgba(34, 34, 34, 0.03);
+    --secondary: rgba(10, 111, 184, 0.8);
+    
+    --down-arrow: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij4KICAgIDxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPGcgZmlsbD0iIzIyMiI+CiAgICAgICAgICAgIDxnPgogICAgICAgICAgICAgICAgPGc+CiAgICAgICAgICAgICAgICAgICAgPGc+CiAgICAgICAgICAgICAgICAgICAgICAgIDxwYXRoIGQ9Ik0xMi40IDE1LjhsLTQuNjk0LTQuNjk0Yy0uMzktLjM5LS4zOTUtMS4wMTcuMDAyLTEuNDE0bC0uMDE2LjAxNmMuMzktLjM5IDEuMDIyLS4zOTQgMS40MTQtLjAwMkwxMi40IDEzbDMuMjk0LTMuMjk0Yy4zOS0uMzkgMS4wMTctLjM5NSAxLjQxNC4wMDJsLS4wMTYtLjAxNmMuMzkuMzkuMzg2IDEuMDMuMDAyIDEuNDE0TDEyLjQgMTUuOHoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC01NjAgLTkxNikgdHJhbnNsYXRlKDI5NiA5MDApIHRyYW5zbGF0ZSg2NCA4KSB0cmFuc2xhdGUoMjAwIDgpIi8+CiAgICAgICAgICAgICAgICAgICAgPC9nPgogICAgICAgICAgICAgICAgPC9nPgogICAgICAgICAgICA8L2c+CiAgICAgICAgPC9nPgogICAgPC9nPgo8L3N2Zz4K");
+  
+  
+    --text-size-s1: #{rem(30px)};
+    --text-size-s2: #{rem(26px)};
+    --text-size-s3: #{rem(14px)};
+  
+    --font-family-default: 'Roboto';
+  }
