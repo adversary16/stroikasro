@@ -1,12 +1,20 @@
 import React, {useContext} from 'react';
-import HTMLcontent from '../../common/HTMLcontent';
 import {RouterContext} from '../../contexts/RouterContext';
+import contentRouter from '../../utils/ContentRouter';
 import styles from './ContentBlock.module.scss';
 
 const ContentBlock = (props) => {
-  const {currentPage: {alias, content}} = useContext(RouterContext);
+  const {currentPage: {alias, content=[]}} = useContext(RouterContext);
+  const processedContent = content.reduce((acc, contentItem) => {
+    const processedContentItem = contentRouter({content: contentItem});
+    return (processedContentItem ? [...acc, processedContentItem] : [...acc]);
+  }, []);
+
   return <div className={styles.contentBlock_root}>
-    <HTMLcontent {...{content}}/>
+    {processedContent.map((Unit) => {
+      return Unit;
+    },
+    )}
   </div>;
 };
 

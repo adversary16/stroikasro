@@ -31,11 +31,12 @@
     }
     display: block;
     margin: 1rem 0;
-    div {
+    div:not(.content) {
       border: solid 1px var(--secondary);
-      &.content {
-        padding: 1.2rem;
-      }
+    }
+    .content div{
+      padding: 1.2rem;
+      border: none;
     }
   }
 }

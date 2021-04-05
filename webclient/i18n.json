@@ -1,0 +1,10 @@
+{
+  "locales": ["ru","en"],
+  "defaultLocale": "ru",
+  "pages": {
+    "*": ["common"],
+    "/main": ["common", "example"],
+    "/about": ["about"],
+    "/roster": ["common", "example"]
+  }
+}

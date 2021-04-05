@@ -1,0 +1,16 @@
+.signupBlock_root {
+  width: 100%;
+  min-height: 10rem;
+  border-radius: 0.5rem;
+  background-color: var(--secondary);
+  padding: 1rem;
+
+  input {
+    line-height: 2rem;
+    font-size: 1.2rem;
+    border-radius: 0.5rem;
+    -webkit-appearance: none;
+    border-style: solid;
+    border-width: none;
+  }
+}

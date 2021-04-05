@@ -3,7 +3,7 @@ import ReactHtmlParser, {processNodes, convertNodeToElement, htmlparser2} from '
 
 const HTMLcontent = ({content}) => {
   const parsedContent = ReactHtmlParser(content);
-  return <>{parsedContent}</>;
+  return <div>{parsedContent}</div>;
 };
 
 export default React.memo(HTMLcontent);

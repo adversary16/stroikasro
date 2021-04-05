@@ -1,10 +1,26 @@
 .logonbox_root{
+  display: flex;
+  flex-direction: row;
+  .logon{
+    display: flex;
+    input {
+    height: 3rem;
+    margin: auto 1rem;
+    display: inline-block;
+    border-radius: 0.5rem;
+  }}
   .icon{
     content: var(--key);
-    background: linear-gradient(rgba(0,80,0, 1), green);
+    background: linear-gradient(var(--orange-in-app), var(--orange));
     height: 4rem;
     width: 4rem;
     padding: 1rem;
     color: var(--white);
+    cursor: pointer;
+  }
+  &.loggedIn {
+    .icon {
+      background: linear-gradient(rgba(0,80,0, 1), green);
+    }
   }
 }
