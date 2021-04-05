@@ -12,10 +12,11 @@ const Logonbox = () => {
     classNames(styles.logonbox_root, isPopupOpen && styles.loggedIn)
   }>
     {
-      isPopupOpen && <div className={styles.logon}>
+      isPopupOpen &&
+      <form className={styles.logon}>
         <input type="text" className={styles.login}></input>
         <input type="password" className={styles.password}></input>
-      </div>}
+      </form>}
     <div
       className={classNames(styles.icon)}
       onClick = {()=>{

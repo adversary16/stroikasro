@@ -4,6 +4,26 @@
   border-radius: 0.5rem;
   background-color: var(--secondary);
   padding: 1rem;
+  display: grid;
+  grid-template:
+  [top-left] "left center right" 1fr [top-right]
+  [bottom-left] "left center right" 1fr [bottom-right]
+  / 1fr 1fr 1fr;
+
+  .column_left {
+    grid-area: left;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%
+  }
+
+  .column_right_center {
+    grid-area: center right;
+    width: 100%;
+    height: 100%;
+    color: var(--white);
+  }
 
   input {
     line-height: 2rem;
@@ -11,6 +31,10 @@
     border-radius: 0.5rem;
     -webkit-appearance: none;
     border-style: solid;
-    border-width: none;
+    border-width: 0;
+    grid-area: left; 
+    display:block;
+    margin: 0.5rem;
+    text-indent: 0.5rem;
   }
 }

@@ -8,6 +8,7 @@
     margin: auto 1rem;
     display: inline-block;
     border-radius: 0.5rem;
+    transition: width 2s linear;
   }}
   .icon{
     content: var(--key);
