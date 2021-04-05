@@ -1,5 +1,6 @@
 module.exports = {
   JWT_TOKEN: process.env.JWT_TOKEN,
+  JWT_TOKEN_EXPIRATION: process.env.JWT_TOKEN_EXPIRATION || 19220,
   SERVER: {
     PORT: process.env.SERVER_PORT || 4001,
   },
