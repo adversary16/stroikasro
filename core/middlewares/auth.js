@@ -6,7 +6,6 @@ const authenticateToken = (req, res, next) => {
   const token = authHeader && authHeader.split(' ')[1];
 
   if (token == null) return res.sendStatus(401);
-
   jwt.verify(token, JWT_TOKEN, (err, user) => {
     console.log(err);
 
