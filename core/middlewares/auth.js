@@ -7,12 +7,8 @@ const authenticateToken = (req, res, next) => {
 
   if (token == null) return res.sendStatus(401);
   jwt.verify(token, JWT_TOKEN, (err, user) => {
-    console.log(err);
-
     if (err) return res.status(403).json({error: 'a'});
-
     req.user = user;
-
     next();
   });
 };
