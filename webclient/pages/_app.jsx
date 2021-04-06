@@ -6,16 +6,19 @@ import BasicContainer from '../containers/BasicContainer';
 import Header from '../components/Header/Header';
 import {RouterContextProvider} from '../contexts/RouterContext';
 import Sidebar from '../components/Sidebar/Sidebar';
+import {AuthContext, AuthContextProvider} from '../contexts/AuthContext';
 
 const MyApp = ({Component, pageProps}) => {
   return (
-    <RouterContextProvider>
-      <Header/>
-      <BasicContainer>
-        <Component {...pageProps}/>
-      </BasicContainer>
-      <Sidebar/>
-    </RouterContextProvider>
+    <AuthContextProvider>
+      <RouterContextProvider>
+        <Header/>
+        <BasicContainer>
+          <Component {...pageProps}/>
+        </BasicContainer>
+        <Sidebar/>
+      </RouterContextProvider>
+    </AuthContextProvider>
   );
 };
 
