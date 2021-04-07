@@ -10,7 +10,7 @@ import {getFormValues} from '../../helpers/getFormValues';
 const Logonbox = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [creds, setCreds] = useState({});
-  const {logonQuery, authToken} = useContext(AuthContext);
+  const {logonQuery, authToken, isLoggedIn} = useContext(AuthContext);
   const logonForm = useRef(null);
   const loginOnEnter = waitForKey.bind(this,
       {
@@ -26,7 +26,7 @@ const Logonbox = () => {
     setCreds({...creds, [name]: value});
   };
   return <div className={
-    classNames(styles.logonbox_root, isPopupOpen && styles.loggedIn)
+    classNames(styles.logonbox_root)
   }>
     {
       isPopupOpen &&
@@ -40,7 +40,7 @@ const Logonbox = () => {
         <input onChange={handleChange} name='password' type="password" className={styles.password}></input>
       </form>}
     <div
-      className={classNames(styles.icon)}
+      className={classNames(styles.icon, isLoggedIn ? styles.authorized : styles.unauthorized)}
       onClick = {()=>{
         setIsPopupOpen(!isPopupOpen);
       }}

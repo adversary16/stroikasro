@@ -19,9 +19,7 @@
     color: var(--white);
     cursor: pointer;
   }
-  &.loggedIn {
-    .icon {
+  .authorized {
       background: linear-gradient(rgba(0,80,0, 1), green);
-    }
   }
 }

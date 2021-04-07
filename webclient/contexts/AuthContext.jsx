@@ -13,7 +13,7 @@ const AuthContextProvider = ({children}) => {
     state: {result: logonResult},
   } = useRequest({
     url: API_URLS.LOGON,
-    data: {username: 'test'},
+    data: {username: null},
     method: 'POST'},
   );
 
@@ -38,6 +38,7 @@ const AuthContextProvider = ({children}) => {
       {
         logonQuery,
         authToken,
+        isLoggedIn,
       }
     }
   >
