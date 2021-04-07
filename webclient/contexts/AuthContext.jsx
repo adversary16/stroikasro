@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {API_URLS} from '../const/const';
 import {useRequest} from '../hooks/useRequest';
 
@@ -6,8 +6,10 @@ const AuthContext = React.createContext({});
 
 
 const AuthContextProvider = ({children}) => {
+  const [isLoggedIn, setIsloggedIn] = useState(false);
+  const [authToken, setAuthToken] = useState('');
   const {
-    actions: {sendQuery: logonQuery},
+    actions: {sendQuery: logonQuery, setAuthToken: setToken},
     state: {result: logonResult},
   } = useRequest({
     url: API_URLS.LOGON,
@@ -16,15 +18,27 @@ const AuthContextProvider = ({children}) => {
   );
 
   useEffect(() => {
-    console.log(logonResult);
+    if (logonResult && logonResult.token) {
+      setIsloggedIn(true);
+      setAuthToken(logonResult.token);
+    } else {
+      setIsloggedIn(false);
+    }
   }, [logonResult]);
+
+  useEffect(() => {
+    setToken(authToken);
+  }, [authToken]);
 
   useEffect(() => {
     logonQuery();
   }, []);
   return <AuthContext.Provider
     value = {
-      {logonQuery}
+      {
+        logonQuery,
+        authToken,
+      }
     }
   >
     {children}

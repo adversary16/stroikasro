@@ -10,7 +10,7 @@ import {getFormValues} from '../../helpers/getFormValues';
 const Logonbox = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [creds, setCreds] = useState({});
-  const {logonQuery} = useContext(AuthContext);
+  const {logonQuery, authToken} = useContext(AuthContext);
   const logonForm = useRef(null);
   const loginOnEnter = waitForKey.bind(this,
       {
@@ -20,10 +20,6 @@ const Logonbox = () => {
         callback: logonQuery,
         args: {body: {...creds}},
       });
-
-  useEffect(() => {
-
-  }, [isPopupOpen]);
 
   const handleChange = (e) => {
     const {name, value} = e.target;
