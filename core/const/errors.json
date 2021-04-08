@@ -1,0 +1,4 @@
+{
+  "registration_email_ValidationError":"Email is not valid",
+  "registration_MongoError_1100":"Email already exists"
+}
