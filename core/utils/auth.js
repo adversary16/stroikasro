@@ -5,6 +5,15 @@ const user = require('../models/user');
 const errorHandler = require('./errorHandler');
 
 
+const validateToken = async (token) => {
+  if (token == null) return false;
+  return jwt.verify(token, JWT_TOKEN, async (err, usercandidate) => {
+    if (err) return false;
+    const isValidUser = !!await user.findOne({_id: usercandidate.id});
+    return (isValidUser);
+  });
+};
+
 const generateAccessToken = ({username, password}) => {
   const expiresIn = '1800d';
   return jwt.sign({username, password}, JWT_TOKEN, {expiresIn});
@@ -28,4 +37,8 @@ const registerUser = async ({username, password}) => {
   }
 };
 
-module.exports = {generateAccessToken, verifyCredentials, registerUser};
+module.exports = {
+  generateAccessToken,
+  verifyCredentials,
+  registerUser,
+  validateToken};

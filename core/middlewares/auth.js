@@ -1,13 +1,16 @@
 const jwt = require('jsonwebtoken');
 const {JWT_TOKEN} = require('../const');
+const userModel = require('../models/user');
 
-const authenticateToken = (req, res, next) => {
+const authenticateToken = async (req, res, next) => {
   const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.split(' ')[1];
 
   if (token == null) return res.sendStatus(401);
-  jwt.verify(token, JWT_TOKEN, (err, user) => {
-    if (err) return res.status(403).json({error: 'a'});
+  jwt.verify(token, JWT_TOKEN, async (err, user) => {
+    if (err) return res.status(401).json({error: 'token invalid'});
+    const isValidUser = !!await userModel.findOne({_id: user.id});
+    if (!isValidUser) res.status(401).json({error: 'token invalid'});
     req.user = user;
     next();
   });

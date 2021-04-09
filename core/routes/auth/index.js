@@ -1,11 +1,16 @@
 const express = require('express');
 const user = require('../../models/user');
-const {generateAccessToken, verifyCredentials, registerUser} = require('../../utils/auth');
+const {generateAccessToken, verifyCredentials, registerUser, validateToken} = require('../../utils/auth');
 const errorHandler = require('../../utils/errorHandler');
 const router = express.Router();
 
-router.post('/login', async (req, res) => {
-  const {username, password} = req.body;
+router.post('/logon', async (req, res) => {
+  const {username, password, token} = req.body;
+  if (token) {
+    const isTokenValid = await validateToken(token);
+    return res.status(200).json({result: isTokenValid, token});
+  }
+
   const getToken = await verifyCredentials({username, password});
   if (getToken) {
     return res.status(200).json({token: getToken});
@@ -16,7 +21,7 @@ router.post('/login', async (req, res) => {
   }
 });
 
-router.post('/logon', async (req, res) => {
+router.post('/signup', async (req, res) => {
   const {username, password} = req.body;
   try {
     const result = await registerUser({username, password});

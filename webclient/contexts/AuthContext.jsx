@@ -1,38 +1,47 @@
 import React, {useEffect, useState} from 'react';
+import cookies from 'next-cookies';
 import {API_URLS} from '../const/const';
 import {useRequest} from '../hooks/useRequest';
+import {useCookies} from 'react-cookie';
 
-const AuthContext = React.createContext({});
+const AuthContext = React.createContext();
 
 
 const AuthContextProvider = ({children}) => {
-  const [isLoggedIn, setIsloggedIn] = useState(false);
-  const [authToken, setAuthToken] = useState('');
+  const [cookies, setCookie, removeCookie] = useCookies(['stroikasro']);
+  const [isLoggedIn, setIsloggedIn] = useState(true);
+  const [authToken, setAuthToken] = useState(cookies.token);
   const {
     actions: {sendQuery: logonQuery, setAuthToken: setToken},
     state: {result: logonResult},
   } = useRequest({
     url: API_URLS.LOGON,
-    data: {username: null},
+    data: {},
     method: 'POST'},
   );
-
   useEffect(() => {
     if (logonResult && logonResult.token) {
-      setIsloggedIn(true);
-      setAuthToken(logonResult.token);
-    } else {
-      setIsloggedIn(false);
+      const {token} = logonResult;
+      token && setAuthToken(logonResult.token);
     }
   }, [logonResult]);
 
   useEffect(() => {
-    setToken(authToken);
+    if (authToken) {
+      setCookie('token', authToken);
+      setIsloggedIn(true);
+    }
   }, [authToken]);
 
   useEffect(() => {
-    logonQuery();
+    const {token} = cookies;
+    if (token) {
+      logonQuery({body: {token: token}});
+    } else {
+      setIsloggedIn(false);
+    }
   }, []);
+
   return <AuthContext.Provider
     value = {
       {

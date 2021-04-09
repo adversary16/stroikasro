@@ -5,7 +5,6 @@ import {AuthContext} from '../contexts/AuthContext';
 export const useRequest = ({data, method, url}) => {
   const [result, setResult] = useState(null);
   const [authToken, setAuthToken] = useState(null);
-
   const sendQuery = useCallback( async ({body} = {body}) => {
     const headers = {
       'Accept': 'application/json',
