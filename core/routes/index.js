@@ -6,7 +6,6 @@ const router = Router();
 
 router.use('/auth', authRoutes);
 router.use('/admin', authenticateToken, adminRoutes);
-
 router.get('/health', authenticateToken, async (req, res) =>{
   res.status(200).json({});
 });

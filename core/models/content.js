@@ -8,7 +8,7 @@ const contentSchema = new Schema({
   title: {
     type: String,
     index: false,
-    required: true,
+    required: false,
   },
   type: {
     type: String,
