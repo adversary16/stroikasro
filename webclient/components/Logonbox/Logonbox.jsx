@@ -26,9 +26,7 @@ const Logonbox = () => {
     setCreds({...creds, [name]: value});
   };
 
-  useEffect(() => {
-    console.log(isLoggedIn);
-  }, [isLoggedIn]);
+
   return <div className={
     classNames(styles.logonbox_root)
   }>
@@ -40,11 +38,21 @@ const Logonbox = () => {
         method={'post'}
         ref={logonForm}
       >
-        <input onChange={handleChange} name='username' type="text" className={styles.login}></input>
-        <input onChange={handleChange} name='password' type="password" className={styles.password}></input>
+        <input
+          onChange={handleChange}
+          name='username'
+          type="text"
+          className={styles.login}>
+        </input>
+        <input
+          onChange={handleChange}
+          name='password'
+          type="password"
+          className={styles.password}>
+        </input>
       </form>}
     <div
-      className={classNames(styles.icon, isLoggedIn ? styles.authorized : null)}
+      className={classNames(styles.icon, isLoggedIn && styles.authorized)}
       onClick = {()=>{
         setIsPopupOpen(!isPopupOpen);
       }}

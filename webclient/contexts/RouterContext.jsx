@@ -1,10 +1,13 @@
 import {Router, useRouter} from 'next/dist/client/router';
-import React, {useEffect} from 'react';
+import React, {useContext, useEffect} from 'react';
+import {SECURE_ROUTES} from '../const/const';
 import navStructure from '../const/routes';
+import {AuthContext} from './AuthContext';
 const RouterContext = React.createContext({});
 
 const RouterContextProvider = ({children}) => {
   const router = useRouter();
+  const {isLoggedIn} = useContext(AuthContext);
   const {
     asPath: rawAsPath,
     content,
@@ -20,6 +23,13 @@ const RouterContextProvider = ({children}) => {
     childPages,
     currentPage: navStructure[asPath] || defaultPage,
   };
+
+  useEffect(() => {
+    if (SECURE_ROUTES.includes(asPath) && !isLoggedIn) {
+      router.push('/');
+    }
+  }, []);
+
   return <RouterContext.Provider
     value={value}
   >

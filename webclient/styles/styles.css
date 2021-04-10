@@ -33,17 +33,10 @@ html {
 }
 
 #__next {
-    min-height: 100%;
-    height: fit-content;
-    position: absolute;
-    width: 100%;
-    display:grid;
-    grid-template:
-        [header-left] "head head head head head" auto [header-right]
-        [main-top-left] "side main main main ." 1fr [main-top-right]
-        [main-bottom-left] "side main main main ." 1fr [main-bottom-right]
-        [footer-left] "foot foot foot foot foot" 1fr [footer-right]
-        / 1fr 1fr 1fr 1fr 1fr;
+  min-height: 100%;
+  height: fit-content;
+  position: absolute;
+  width: 100%;
 }
 
 #__next::-webkit-scrollbar {
@@ -55,3 +48,16 @@ html {
     background-color: #222222;
   }
 
+#__nossr{
+  min-height: 100%;
+  height: fit-content;
+  position: absolute;
+  width: 100%;
+  display:grid;
+  grid-template:
+      [header-left] "head head head head head" auto [header-right]
+      [main-top-left] "side main main main ." 1fr [main-top-right]
+      [main-bottom-left] "side main main main ." 1fr [main-bottom-right]
+      [footer-left] "foot foot foot foot foot" 1fr [footer-right]
+      / 1fr 1fr 1fr 1fr 1fr;
+}

@@ -9,7 +9,7 @@ const AuthContext = React.createContext();
 
 const AuthContextProvider = ({children}) => {
   const [cookies, setCookie, removeCookie] = useCookies(['stroikasro']);
-  const [isLoggedIn, setIsloggedIn] = useState(true);
+  const [isLoggedIn, setIsloggedIn] = useState((cookies.token !== undefined));
   const [authToken, setAuthToken] = useState(cookies.token);
   const {
     actions: {sendQuery: logonQuery, setAuthToken: setToken},
