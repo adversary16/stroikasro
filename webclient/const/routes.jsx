@@ -2,6 +2,7 @@ const navStructure = {
   'main': {
     alias: 'Главная',
     isIndex: true,
+    banner: true,
     content: [
       {type: 'signupBlock'},
       {type: 'html',
@@ -52,6 +53,7 @@ const navStructure = {
   },
   'about': {
     alias: 'Об ассоциации',
+    banner: true,
   },
   'disclosure': {
     alias: 'Раскрытие информации',

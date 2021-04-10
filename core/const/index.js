@@ -7,4 +7,8 @@ module.exports = {
   },
   MONGO_URI: process.env.MONGO_URI || 'mongodb://localhost:27017',
   PASSWORD_HASHING_ROUNDS: process.env.PASSWORD_HASHING_ROUNDS || 10,
+  CONTENT_TYPES: {
+    html: 'html',
+    block: 'block',
+  },
 };

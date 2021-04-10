@@ -5,7 +5,11 @@ import contentRouter from '../../utils/ContentRouter';
 import styles from './ContentBlock.module.scss';
 
 const ContentBlock = (props) => {
-  const {currentPage: {alias, content=[]}} = useContext(RouterContext);
+  const {
+    currentPage: {
+      alias, content=[],
+    },
+  } = props;
   const processedContent = content.reduce((acc, contentItem) => {
     const processedContentItem = {...contentRouter({content: contentItem}), key: v4()};
     return (processedContentItem ? [...acc, processedContentItem] : [...acc]);

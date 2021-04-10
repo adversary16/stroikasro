@@ -4,9 +4,9 @@ import ContentBlock from '../../components/ContentBlock/ContentBlock';
 import {RouterContext} from '../../contexts/RouterContext';
 
 const ContentPage = () => {
-  const {asPath} = useContext(RouterContext);
+  const {asPath, currentPage} = useContext(RouterContext);
   return <>
-    <ContentBlock {...{asPath}}/>
+    <ContentBlock {...{asPath, currentPage}}/>
   </>;
 };
 
