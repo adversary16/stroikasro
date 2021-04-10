@@ -5,7 +5,6 @@ const {CONTENT_TYPES} = require('../../const');
 const updateContentsAndReturnIds = async ({content = []}) => {
   const contentIdArray = content.reduce( async (acc, item) => {
     const {type, id, value} = item;
-
     if (!Object.keys(Content.discriminators).includes(type)) return [...acc];
     if (!!id) {
       return [
