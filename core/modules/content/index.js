@@ -6,14 +6,14 @@ const updateContentsAndReturnIds = async ({content = []}) => {
   const contentIdArray = content.reduce( async (acc, item) => {
     const {type, id, value} = item;
 
-    if (!Object.values(CONTENT_TYPES).includes(type)) return [...acc];
+    if (!Object.keys(Content.discriminators).includes(type)) return [...acc];
     if (!!id) {
       return [
         ...await acc,
         await Content.findOneAndUpdate({_id: id}, {type, value})._id,
       ];
     } else {
-      const newContent = await Content.create({type, value});
+      const newContent = await Content.discriminators[type].create({type, value});
       await newContent.save();
       const {_id} = newContent;
       return [...await acc, _id];
@@ -30,6 +30,14 @@ exports.createOrUpdatePage = async ({content, id, alias, ...rest}) => {
   } else {
     const newPage = await Page.create({alias, ...rest, content: [...updatedContents]});
     await newPage.save();
-    return !!newPage;
+    return newPage._id || false;
   }
+};
+
+exports.getPageById = async ({id}) => {
+  const requestedPage = await Page.findById(id)
+      .populate({
+        path: 'content',
+      });
+  return requestedPage;
 };

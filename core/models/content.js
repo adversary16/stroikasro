@@ -18,7 +18,7 @@ const contentSchema = new Schema({
 });
 
 const HTMLContentSchema = new Schema({
-  content: {
+  value: {
     type: String,
     index: true,
     default: '',
@@ -40,7 +40,7 @@ const BlockContentSchema = new Schema({
   },
 }, options);
 
-const Content = mongoose.model('content', contentSchema);
+const Content = mongoose.model('Content', contentSchema);
 
 exports.Content = Content;
 exports.HTMLContent = Content.discriminator(CONTENT_TYPES.html, HTMLContentSchema);
