@@ -24,6 +24,10 @@ const pageSchema = new Schema({
     required: false,
 
   },
+  isActive: {
+    type: Boolean,
+    default: true,
+  },
   childPages: [
     {
       type: Schema.Types.ObjectId,
