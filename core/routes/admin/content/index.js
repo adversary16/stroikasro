@@ -8,7 +8,7 @@ router.get('/', (req, res) => {
 
 router.put('/', async (req, res) => {
   const {user, body} = req;
-  res.status(200).json({sucess: await createOrUpdatePage(body)});
+  res.status(200).json({success: await createOrUpdatePage(body)});
 });
 
 module.exports = router;
