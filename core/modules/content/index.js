@@ -1,6 +1,7 @@
 const Page = require('../..//models/page');
 const {Content} = require('../../models/content');
 const {CONTENT_TYPES} = require('../../const');
+const route = require('../../models/route');
 
 const updateContentsAndReturnIds = async ({content = []}) => {
   const contentIdArray = content.reduce( async (acc, item) => {
@@ -21,14 +22,21 @@ const updateContentsAndReturnIds = async ({content = []}) => {
   return await contentIdArray;
 };
 
+const updateRoute = async ({id, link}) => {
+  const updatedRoute = await route.findOneAndUpdate({link}, {page: id, link}, {upsert: true});
+  return updatedRoute._id;
+};
 
-exports.createOrUpdatePage = async ({content, id, alias, ...rest}) => {
+exports.createOrUpdatePage = async ({content, id, alias, link, ...rest}) => {
   const updatedContents = await updateContentsAndReturnIds({content});
   if (!!id) {
-    return !!(await Page.findOneAndUpdate({_id: id}, {alias, ...rest, content: [...updatedContents]}));
+    const updatedPage = await Page.findOneAndUpdate({_id: id}, {alias, ...rest, content: [...updatedContents]});
+    updatedPage && await updateRoute({id: updatedPage._id, link});
+    return updatedPage._id || false;
   } else {
     const newPage = await Page.create({alias, ...rest, content: [...updatedContents]});
     await newPage.save();
+    newPage && await updateRoute({id: newPage._id, link});
     return newPage._id || false;
   }
 };

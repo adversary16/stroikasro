@@ -5,8 +5,7 @@ import styles from './Header.module.scss';
 import Navbar from './Navbar';
 
 const Header = () => {
-  const {currentPage} = useContext(RouterContext);
-
+  const {currentPage, activePage} = useContext(RouterContext);
   return <><div className={styles.headerWrapper}>
     <div className={styles.row_top}>
       <Navbar/>
