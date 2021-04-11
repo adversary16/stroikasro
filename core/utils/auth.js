@@ -1,6 +1,10 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-const {JWT_TOKEN, JWT_TOKEN_EXPIRATION, PASSWORD_HASHING_ROUNDS} = require('../const');
+const {
+  JWT_TOKEN,
+  JWT_TOKEN_EXPIRATION,
+  PASSWORD_HASHING_ROUNDS,
+} = require('../const');
 const user = require('../models/user');
 const errorHandler = require('./errorHandler');
 

@@ -40,3 +40,14 @@ exports.getPageById = async ({id}) => {
       });
   return requestedPage;
 };
+
+exports.getPageByRouteName = async ({route}) => {
+  const mongoquery = route.reduce((acc, alias) => {
+    return (`${acc} ${alias}`);
+  }, '');
+  const [primary, secondary, ...rest] = route;
+  const requestedPage = await Page.findOne({link: primary}).populate({
+    path: 'content',
+  });
+  return requestedPage;
+};
