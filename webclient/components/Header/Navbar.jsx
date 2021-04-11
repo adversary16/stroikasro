@@ -1,5 +1,4 @@
 import React, {useContext} from 'react';
-import navStructure from '../../const/routes';
 import styles from './Navbar.module.scss';
 import classNames from 'classnames';
 import {v4 as uuidv4} from 'uuid';
@@ -9,22 +8,22 @@ import {RouterContext} from '../../contexts/RouterContext';
 
 
 const Navbar = () => {
-  const pages = navStructure;
+  const {structure} = useContext(RouterContext);
   const {asPath} = useContext(RouterContext);
   return (
     <div className={styles.navBar_root}>{
-      Object.keys(pages).map( (item) =>
+      Object.values(structure).map( ({alias, link, isIndex}) =>
         <Link
-          href={`/${item}`}
-          as={`/${item}`}
+          href={`/${link}`}
+          as={`/${link}`}
           key={uuidv4()}
         >
           <a
             className={
               classNames(styles.link,
-                  (asPath === item || !asPath && pages[item].isIndex) &&
+                  (asPath === link || !asPath && isIndex) &&
                   styles.current)}>
-            {pages[item].alias}
+            {alias}
           </a>
         </Link>)
     }

@@ -25,7 +25,7 @@ const updateContentsAndReturnIds = async ({content = []}) => {
 
 const updateRoute = async ({id, link}) => {
   const updatedRoute = await route.findOneAndUpdate({link}, {page: id, link}, {upsert: true});
-  return updatedRoute._id;
+  return !!updatedRoute;
 };
 
 exports.createOrUpdatePage = async ({content, id, alias, link, ...rest}) => {
@@ -36,8 +36,8 @@ exports.createOrUpdatePage = async ({content, id, alias, link, ...rest}) => {
     return updatedPage._id || false;
   } else {
     const newPage = await Page.create({alias, ...rest, content: [...updatedContents]});
-    newPage && await updateRoute({id: newPage._id, link});
     await newPage.save();
+    newPage && await updateRoute({id: newPage._id, link});
     return newPage._id || false;
   }
 };
@@ -51,13 +51,25 @@ exports.getPageById = async ({id}) => {
 };
 
 exports.getPageByRouteName = async ({route}) => {
-  const mongoquery = route.reduce((acc, alias) => {
-    return (`${acc} ${alias}`);
-  }, '');
   const [primary, secondary, ...rest] = route;
-  const requestedPage = await Page.findOne({link: primary}).populate({
-    path: 'content',
-  });
+
+  const [requestedPage] = await Route.aggregate([
+    {$match: {
+      link: primary,
+    }},
+    {$lookup: {
+      from: 'pages',
+      localField: 'page',
+      foreignField: '_id',
+      as: 'page',
+    }},
+    {$project: {
+      content: '$page.content',
+      banner: '$page.banner',
+      alias: '$page.alias',
+    }},
+  ]);
+
   return requestedPage;
 };
 
@@ -68,19 +80,28 @@ exports.getStructure = async () => {
       from: 'pages',
       localField: 'page',
       foreignField: '_id',
-      as: 'alias',
+      as: 'page',
     },
     },
     {$group: {
       _id: {
         link: '$link',
-        alias: '$alias.alias'},
+        alias: '$page.alias',
+        menuOrder: '$menuOrder',
+        isIndex: '$isIndex',
+      },
     }},
     {$project: {
       'link': '$_id.link',
       'alias': {$arrayElemAt: ['$_id.alias', 0]},
+      'menuOrder': '$_id.menuOrder',
+      'isIndex': '$_id.isIndex',
       '_id': 0,
     }},
+    {$sort: {
+      menuOrder: 1,
+    },
+    },
   ]);
-  return structure;
+  return Object.values(structure);
 };

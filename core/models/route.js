@@ -16,6 +16,14 @@ const RouteSchema = new Schema({
     type: mongoose.Types.ObjectId,
     ref: 'Route',
   },
+  isIndex: {
+    type: Boolean,
+    default: false,
+  },
+  menuOrder: {
+    type: Number,
+    default: 0,
+  },
 });
 
 RouteSchema.pre('save', async function save(next) {

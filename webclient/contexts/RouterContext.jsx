@@ -22,7 +22,7 @@ const RouterContextProvider = ({children}) => {
   const {childPages} = navStructure[asPath] || {};
 
   const {
-    actions: {sendQuery},
+    actions: {sendQuery: getContent},
     state: {result},
   } = useRequest({
     url: `${BASEURL}/${SECURE_ROUTES.includes(asPath) ? asPath : 'content/'}`,
@@ -30,11 +30,27 @@ const RouterContextProvider = ({children}) => {
     body: asPath,
   });
 
+  const {
+    actions: {
+      sendQuery: getStructure,
+    },
+    state: {
+      result: getStructureResult,
+    },
+  } = useRequest({
+    url: `${BASEURL}/content/structure`,
+    method: 'GET',
+    data: '',
+  });
+
+  const [structure, setStructure] = useState(getStructureResult || {});
+
   const value = {
     asPath,
     childPages,
     currentPage: navStructure[asPath] || defaultPage,
     activePage,
+    structure,
   };
 
   useEffect( async () => {
@@ -42,10 +58,13 @@ const RouterContextProvider = ({children}) => {
       router.push('/');
     }
     if (asPath !== '[...contentPage]') {
-      const receivedPage = await sendQuery({body: {route: subPath}});
+      const receivedPage = await getContent({body: {route: subPath}});
       setActivePage({...receivedPage});
     }
+    const {structure: currentStructure} = await getStructure({});
+    setStructure({...currentStructure});
   }, [asPath]);
+
 
   return <RouterContext.Provider
     value={value}
