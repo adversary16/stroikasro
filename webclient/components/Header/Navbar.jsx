@@ -12,7 +12,7 @@ const Navbar = () => {
   const {asPath} = useContext(RouterContext);
   return (
     <div className={styles.navBar_root}>{
-      Object.values(structure).map( ({alias, link, isIndex}) =>
+      structure.map( ({alias, link, isIndex}) =>
         <Link
           href={`/${link}`}
           as={`/${link}`}

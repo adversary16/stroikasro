@@ -63,10 +63,17 @@ exports.getPageByRouteName = async ({route}) => {
       foreignField: '_id',
       as: 'page',
     }},
+    {$lookup: {
+      from: 'contents',
+      localField: 'page.content',
+      foreignField: '_id',
+      as: 'page.content',
+    },
+    },
     {$project: {
       content: '$page.content',
-      banner: '$page.banner',
-      alias: '$page.alias',
+      banner: {$arrayElemAt: ['$page.banner', 0]},
+      alias: {$arrayElemAt: ['$page.alias', 0]},
     }},
   ]);
 

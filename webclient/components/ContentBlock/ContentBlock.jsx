@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {v4} from 'uuid';
 import {RouterContext} from '../../contexts/RouterContext';
 import contentRouter from '../../utils/ContentRouter';
@@ -11,16 +11,21 @@ const ContentBlock = (props) => {
     },
   } = props;
   const {activePage} = useContext(RouterContext);
-  const processedContent = content.reduce((acc, contentItem) => {
-    const processedContentItem = {...contentRouter({content: contentItem}), key: v4()};
-    return (processedContentItem ? [...acc, processedContentItem] : [...acc]);
-  }, []);
+  const [currentContent, setCurrentContent] = useState([]);
+
 
   useEffect(() => {
-    console.log(activePage);
-  }, [activePage.page]);
+    const {content} = activePage;
+    if (content) {
+      const processedContent = content.reduce((acc, contentItem) => {
+        const processedContentItem = {...contentRouter({content: contentItem}), key: v4()};
+        return (processedContentItem ? [...acc, processedContentItem] : [...acc]);
+      }, []);
+      setCurrentContent(processedContent);
+    }
+  }, [activePage]);
   return <div className={styles.contentBlock_root}>
-    {processedContent.map((Unit) => {
+    {currentContent.map((Unit) => {
       return Unit;
     },
     )}

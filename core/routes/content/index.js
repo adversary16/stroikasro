@@ -7,11 +7,11 @@ const router = express.Router();
 router.post('/', async (req, res) => {
   const {route} = req.body;
   const requestedPage = await getPageByRouteName({route});
-  return res.status(200).json({page: requestedPage});
+  return res.status(200).json({...requestedPage});
 });
 
 router.get('/structure', async (req, res) => {
-  return res.status(200).json({structure: await getStructure()});
+  return res.status(200).json(await getStructure());
 });
 
 router.get('/:id', async (req, res) => {
@@ -20,7 +20,7 @@ router.get('/:id', async (req, res) => {
     return res.status(400).json({error: 'invalid_id'});
   }
   const requestedPage = await getPageById({id});
-  return res.status(200).json({page: requestedPage});
+  return res.status(200).json({...requestedPage});
 });
 
 

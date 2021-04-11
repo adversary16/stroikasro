@@ -43,7 +43,7 @@ const RouterContextProvider = ({children}) => {
     data: '',
   });
 
-  const [structure, setStructure] = useState(getStructureResult || {});
+  const [structure, setStructure] = useState([]);
 
   const value = {
     asPath,
@@ -61,8 +61,8 @@ const RouterContextProvider = ({children}) => {
       const receivedPage = await getContent({body: {route: subPath}});
       setActivePage({...receivedPage});
     }
-    const {structure: currentStructure} = await getStructure({});
-    setStructure({...currentStructure});
+    const currentStructure = await getStructure({});
+    setStructure(currentStructure);
   }, [asPath]);
 
 
