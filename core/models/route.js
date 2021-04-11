@@ -10,6 +10,7 @@ const RouteSchema = new Schema({
   page: {
     type: mongoose.Types.ObjectId,
     required: true,
+    ref: 'Page',
   },
   parent: {
     type: mongoose.Types.ObjectId,

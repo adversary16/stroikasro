@@ -1,4 +1,5 @@
-const Page = require('../..//models/page');
+const Page = require('../../models/page');
+const Route = require('../../models/route');
 const {Content} = require('../../models/content');
 const {CONTENT_TYPES} = require('../../const');
 const route = require('../../models/route');
@@ -35,8 +36,8 @@ exports.createOrUpdatePage = async ({content, id, alias, link, ...rest}) => {
     return updatedPage._id || false;
   } else {
     const newPage = await Page.create({alias, ...rest, content: [...updatedContents]});
-    await newPage.save();
     newPage && await updateRoute({id: newPage._id, link});
+    await newPage.save();
     return newPage._id || false;
   }
 };
@@ -58,4 +59,28 @@ exports.getPageByRouteName = async ({route}) => {
     path: 'content',
   });
   return requestedPage;
+};
+
+exports.getStructure = async () => {
+  const structure = await Route.aggregate([
+    {$match: {page: {$exists: true}}},
+    {$lookup: {
+      from: 'pages',
+      localField: 'page',
+      foreignField: '_id',
+      as: 'alias',
+    },
+    },
+    {$group: {
+      _id: {
+        link: '$link',
+        alias: '$alias.alias'},
+    }},
+    {$project: {
+      'link': '$_id.link',
+      'alias': {$arrayElemAt: ['$_id.alias', 0]},
+      '_id': 0,
+    }},
+  ]);
+  return structure;
 };
