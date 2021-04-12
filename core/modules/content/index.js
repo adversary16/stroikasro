@@ -124,14 +124,14 @@ exports.getStructure = async () => {
     {$group: {
       _id: {
         link: '$link',
-        alias: '$page.alias',
+        alias: '$alias',
         menuOrder: '$menuOrder',
         isIndex: '$isIndex',
       },
     }},
     {$project: {
       'link': '$_id.link',
-      'alias': {$arrayElemAt: ['$_id.alias', 0]},
+      'alias': '$_id.alias',
       'menuOrder': '$_id.menuOrder',
       'isIndex': '$_id.isIndex',
       '_id': 0,

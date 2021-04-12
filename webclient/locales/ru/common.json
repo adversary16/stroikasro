@@ -2,6 +2,6 @@
   "test": "asdasd",
   "inn_placeholder": "ИНН",
   "phone_placeholder": "Номер телефона",
-  "name_placeholder": "Имя контактного лица",
+  "name_placeholder": "ФИО контактного лица",
   "personal_data_agreement": "Я соглашаюсь на обработку моих персональных данных"
 }
