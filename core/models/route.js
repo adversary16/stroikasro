@@ -24,6 +24,9 @@ const RouteSchema = new Schema({
     type: Number,
     default: 0,
   },
+  alias: {
+    type: String,
+  },
 });
 
 RouteSchema.pre('save', async function save(next) {

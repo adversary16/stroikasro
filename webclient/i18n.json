@@ -3,8 +3,8 @@
   "defaultLocale": "ru",
   "pages": {
     "*": ["common"],
-    "/main": ["common", "example"],
+    "/main": ["common"],
     "/about": ["about"],
-    "/roster": ["common", "example"]
+    "/roster": ["common"]
   }
 }

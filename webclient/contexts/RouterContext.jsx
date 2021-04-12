@@ -59,6 +59,7 @@ const RouterContextProvider = ({children}) => {
     }
     if (asPath !== '[...contentPage]') {
       const receivedPage = await getContent({body: {route: subPath}});
+      console.log(receivedPage);
       setActivePage({...receivedPage});
     }
     const currentStructure = await getStructure({});

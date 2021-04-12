@@ -16,8 +16,8 @@
     text-decoration: none;
 
     &.current{
-      background-color: var(--white);
-      color: var(--primary);
+      background-color: var(--white) !important;
+      color: var(--primary) !important;
       border-bottom: solid 0.2rem var(--red);
     }
 

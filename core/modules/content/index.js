@@ -23,8 +23,8 @@ const updateContentsAndReturnIds = async ({content = []}) => {
   return await contentIdArray;
 };
 
-const updateRoute = async ({id, link}) => {
-  const updatedRoute = await route.findOneAndUpdate({link}, {page: id, link}, {upsert: true});
+const updateRoute = async ({id, link, alias}) => {
+  const updatedRoute = await route.findOneAndUpdate({link}, {page: id, link, alias}, {upsert: true});
   return !!updatedRoute;
 };
 
@@ -32,12 +32,12 @@ exports.createOrUpdatePage = async ({content, id, alias, link, ...rest}) => {
   const updatedContents = await updateContentsAndReturnIds({content});
   if (!!id) {
     const updatedPage = await Page.findOneAndUpdate({_id: id}, {alias, ...rest, content: [...updatedContents]});
-    updatedPage && await updateRoute({id: updatedPage._id, link});
+    updatedPage && await updateRoute({id: updatedPage._id, link, alias});
     return updatedPage._id || false;
   } else {
     const newPage = await Page.create({alias, ...rest, content: [...updatedContents]});
     await newPage.save();
-    newPage && await updateRoute({id: newPage._id, link});
+    newPage && await updateRoute({id: newPage._id, link, alias});
     return newPage._id || false;
   }
 };
@@ -52,37 +52,68 @@ exports.getPageById = async ({id}) => {
 
 exports.getPageByRouteName = async ({route}) => {
   const [primary, secondary, ...rest] = route;
+  const primaryOrIndexQuery = primary ?
+  {link: primary} : {isIndex: true};
+
+  console.log(primaryOrIndexQuery);
+
+  const filter = secondary ?
+  [
+    {$match: {link: secondary}},
+    {$lookup: {
+      from: 'routes',
+      localField: 'parent',
+      foreignField: '_id',
+      as: 'parent',
+    }},
+    {$match: {
+      'parent.link': primary,
+    }},
+
+  ]:
+  [{$match: {...primaryOrIndexQuery}}];
 
   const [requestedPage] = await Route.aggregate([
-    {$match: {
-      link: primary,
-    }},
+    ...filter,
     {$lookup: {
       from: 'pages',
       localField: 'page',
       foreignField: '_id',
-      as: 'page',
+      as: 'properties',
     }},
     {$lookup: {
       from: 'contents',
-      localField: 'page.content',
+      localField: 'properties.content',
       foreignField: '_id',
       as: 'page.content',
-    },
-    },
+    }},
+    {$lookup: {
+      from: 'routes',
+      localField: '_id',
+      foreignField: 'parent',
+      as: 'childPages',
+    }},
     {$project: {
       content: '$page.content',
-      banner: {$arrayElemAt: ['$page.banner', 0]},
-      alias: {$arrayElemAt: ['$page.alias', 0]},
+      properties: {$arrayElemAt: ['$properties', 0]},
+      childPages: '$childPages',
+    }},
+    {$project: {
+      content: '$content',
+      alias: '$properties.alias',
+      banner: '$properties.banner',
+      childPages: '$childPages',
     }},
   ]);
-
+  requestedPage.content.reverse();
   return requestedPage;
 };
 
 exports.getStructure = async () => {
   const structure = await Route.aggregate([
-    {$match: {page: {$exists: true}}},
+    {$match:
+      {page: {$exists: true}},
+    },
     {$lookup: {
       from: 'pages',
       localField: 'page',

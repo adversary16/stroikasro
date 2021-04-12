@@ -21,3 +21,11 @@
     margin: 4rem 0 0 0;
     background-color: var(--gray-light);
 }
+
+.separator {
+    grid-area: head;
+    width: 100%;
+    position: relative;
+    height: 0px;
+    margin: 4rem 0 0 0;
+}

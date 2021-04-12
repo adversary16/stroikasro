@@ -12,6 +12,7 @@ import {useCookies} from 'react-cookie';
 import {useRequest} from '../hooks/useRequest';
 import {API_URLS} from '../const/const';
 import cookies from 'next-cookies';
+import FooterContainer from '../containers/Footer';
 
 function SafeHydrate({children}) {
   return (
@@ -31,6 +32,7 @@ const MyApp = ({Component, pageProps}) => {
             <Component {...pageProps}/>
           </BasicContainer>
           <Sidebar/>
+          <FooterContainer/>
         </RouterContextProvider>
       </AuthContextProvider>
     </SafeHydrate>

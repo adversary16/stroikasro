@@ -1,15 +1,15 @@
-import React from 'react';
+import React, {Component} from 'react';
 import HTMLcontent from '../common/HTMLcontent';
 import SignupBlock from '../components/SignupBlock/SignupBlock';
 
+
 const contentRouter = ({content}) => {
   const {type, value} = content;
-
   switch (type) {
     case 'html':
       return <HTMLcontent {...{content: value}}/>;
       break;
-    case 'signupBlock':
+    case 'block':
       return <SignupBlock/>;
       break;
     default:

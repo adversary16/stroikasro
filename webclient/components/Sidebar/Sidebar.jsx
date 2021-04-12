@@ -24,7 +24,7 @@ const SideBarBlock = ({block: {title, content}}) => {
 const Sidebar = () => {
   const {
     asPath,
-    currentPage: {
+    activePage: {
       alias,
       childPages,
       sidebarBlocks,
@@ -32,9 +32,9 @@ const Sidebar = () => {
   } = useContext(RouterContext);
   return <div className={styles.sidebar_root}>
     {
-      childPages && <div className={styles.block}>
+      (childPages && (childPages.length > 0 )) && <div className={styles.block}>
         <SidebarHeader>{alias}</SidebarHeader>
-        <SideNavMenu {...{childPages}}/>
+        <SideNavMenu {...{childPages, asPath}}/>
       </div>
     }
     {

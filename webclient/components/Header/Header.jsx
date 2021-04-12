@@ -5,16 +5,17 @@ import styles from './Header.module.scss';
 import Navbar from './Navbar';
 
 const Header = () => {
-  const {currentPage, activePage} = useContext(RouterContext);
+  const {activePage} = useContext(RouterContext);
   return <><div className={styles.headerWrapper}>
     <div className={styles.row_top}>
       <Navbar/>
       <Logonbox/>
     </div>
   </div>
-  { currentPage.banner &&
+  { activePage.banner &&
      <div className={styles.banner}></div>
   }
+  <div className={styles.separator}></div>
   </>;
 };
 
