@@ -20,7 +20,7 @@ services:
     volumes:
       - ./core:/app
       - /app/node_modules
-      - /data/stroikasro/local/files:/data/storage
+      - /data/stroikaSro/local/files:/data/storage
     depends_on:
       - mongo
     links:

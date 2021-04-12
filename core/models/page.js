@@ -9,15 +9,16 @@ const pageSchema = new Schema({
     required: true,
   },
   banner: {
-    type: String,
-    index: false,
-    required: false,
-  },
-  bannerLink: {
-    type: String,
-    index: false,
-    required: false,
-
+    image: {
+      type: Schema.Types.ObjectId,
+      ref: 'File',
+    },
+    link: {
+      type: String,
+    },
+    caption: {
+      type: String,
+    },
   },
   isActive: {
     type: Boolean,

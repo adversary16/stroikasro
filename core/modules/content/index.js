@@ -1,8 +1,13 @@
 const Page = require('../../models/page');
 const Route = require('../../models/route');
 const {Content} = require('../../models/content');
-const {CONTENT_TYPES} = require('../../const');
+const {CONTENT_TYPES, STORAGE_PATH, SERVER} = require('../../const');
 const route = require('../../models/route');
+const {
+  createTemporaryFile,
+  processFile,
+  validateFile,
+} = require('../../utils/files');
 
 const updateContentsAndReturnIds = async ({content = []}) => {
   const contentIdArray = content.reduce( async (acc, item) => {
@@ -93,15 +98,27 @@ exports.getPageByRouteName = async ({route}) => {
       foreignField: 'parent',
       as: 'childPages',
     }},
+    {$lookup: {
+      from: 'files',
+      localField: 'properties.banner.image',
+      foreignField: '_id',
+      as: 'banner',
+    },
+    },
     {$project: {
       content: '$page.content',
       properties: {$arrayElemAt: ['$properties', 0]},
       childPages: '$childPages',
+      banner: {$arrayElemAt: ['$banner', 0]},
     }},
     {$project: {
       content: '$content',
       alias: '$properties.alias',
-      banner: '$properties.banner',
+      banner: {
+        caption: '$properties.banner.caption',
+        link: '$properties.banner.link',
+        image: {$concat: [SERVER.FILE_ENDPOINT, '/', '$banner.filename']},
+      },
       childPages: '$childPages',
     }},
   ]);
@@ -142,4 +159,15 @@ exports.getStructure = async () => {
     },
   ]);
   return Object.values(structure);
+};
+
+exports.createOrUpdateMediaFiles = async ({files}) => {
+  const updatedFilesIds = files.reduce(async (acc, file) => {
+    const tempFile = await createTemporaryFile(file);
+    const {type} = await validateFile(tempFile);
+    if (!type) return [...acc];
+    const processedFileID = await processFile({...tempFile, type});
+    return [...acc, processedFileID._id];
+  }, []);
+  return updatedFilesIds;
 };

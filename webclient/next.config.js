@@ -14,6 +14,9 @@ module.exports = {
       {
         source: '/',
         destination: '/main',
+      }, {
+        source: '/data/:slug*',
+        destination: '/v1/content/files/:slug*',
       },
     ];
   },

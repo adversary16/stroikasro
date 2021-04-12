@@ -1,6 +1,8 @@
 const express = require('express');
+const multer = require('multer');
+const upload = multer();
 const mongoose = require('mongoose');
-const {createOrUpdatePage, getPageById} = require('../../../modules/content');
+const {createOrUpdatePage, getPageById, createOrUpdateMediaFiles} = require('../../../modules/content');
 const router = express.Router();
 
 router.get('/', (req, res) => {
@@ -10,6 +12,12 @@ router.get('/', (req, res) => {
 router.put('/', async (req, res) => {
   const {user, body} = req;
   res.status(200).json({sucess: await createOrUpdatePage(body)});
+});
+
+router.put('/file', upload.any(), async (req, res) => {
+  const {body, files} = req;
+  const result = await createOrUpdateMediaFiles({files});
+  res.status(200).json(result);
 });
 
 router.get('/:id', async (req, res) => {
