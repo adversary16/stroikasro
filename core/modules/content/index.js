@@ -129,7 +129,10 @@ exports.getPageByRouteName = async ({route}) => {
 exports.getStructure = async () => {
   const structure = await Route.aggregate([
     {$match:
-      {page: {$exists: true}},
+      {
+        page: {$exists: true},
+        parent: {$eq: null},
+      },
     },
     {$lookup: {
       from: 'pages',
