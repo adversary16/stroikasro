@@ -6,10 +6,11 @@ import {useRequest} from '../hooks/useRequest';
 import {AuthContext} from './AuthContext';
 const RouterContext = React.createContext({});
 
-const RouterContextProvider = ({children}) => {
+const RouterContextProvider = (props) => {
+  const {children, content} = props;
   const router = useRouter();
   const {isLoggedIn} = useContext(AuthContext);
-  const [activePage, setActivePage] = useState({});
+  const [activePage, setActivePage] = useState(content);
   const {
     asPath: rawAsPath,
   } = router;
@@ -59,7 +60,6 @@ const RouterContextProvider = ({children}) => {
     }
     if (asPath !== '[...contentPage]') {
       const receivedPage = await getContent({body: {route: subPath}});
-      console.log(receivedPage);
       setActivePage({...receivedPage});
     }
     const currentStructure = await getStructure({});

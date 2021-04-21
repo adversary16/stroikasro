@@ -21,28 +21,33 @@ const SideBarBlock = ({block: {title, content}}) => {
     </div>);
 };
 
-const Sidebar = () => {
+const Sidebar = (props) => {
   const {
     asPath,
-    activePage: {
+    content,
+  } = props;
+  if (!content) return <></>;
+
+  else {
+    const {
       alias,
       childPages,
       sidebarBlocks,
-    },
-  } = useContext(RouterContext);
-  return <div className={styles.sidebar_root}>
-    {
-      (childPages && (childPages.length > 0 )) && <div className={styles.block}>
-        <SidebarHeader>{alias}</SidebarHeader>
-        <SideNavMenu {...{childPages, asPath}}/>
-      </div>
-    }
-    {
-      sidebarBlocks && sidebarBlocks.map((block) =>
-        <SideBarBlock key={v4()} {...{block}}/>,
-      )
-    }
-  </div>;
+    } = content;
+    return <div className={styles.sidebar_root}>
+      {
+        (childPages && (childPages.length > 0 )) && <div className={styles.block}>
+          <SidebarHeader>{alias}</SidebarHeader>
+          <SideNavMenu {...{childPages, asPath}}/>
+        </div>
+      }
+      {
+        sidebarBlocks && sidebarBlocks.map((block) =>
+          <SideBarBlock key={v4()} {...{block}}/>,
+        )
+      }
+    </div>;
+  }
 };
 
 export default React.memo(Sidebar);

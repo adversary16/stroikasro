@@ -10,22 +10,13 @@ const ContentBlock = (props) => {
       alias, content=[],
     },
   } = props;
-  const {activePage} = useContext(RouterContext);
-  const [currentContent, setCurrentContent] = useState([]);
+  const processedContent = content.reduce((acc, contentItem) => {
+    const processedContentItem = {...contentRouter({content: contentItem}), key: v4()};
+    return (processedContentItem ? [...acc, processedContentItem] : [...acc]);
+  }, []);
 
-
-  useEffect(() => {
-    const {content} = activePage;
-    if (content) {
-      const processedContent = content.reduce((acc, contentItem) => {
-        const processedContentItem = {...contentRouter({content: contentItem}), key: v4()};
-        return (processedContentItem ? [...acc, processedContentItem] : [...acc]);
-      }, []);
-      setCurrentContent(processedContent);
-    }
-  }, [activePage]);
   return <div className={styles.contentBlock_root}>
-    {currentContent.map((Unit) => {
+    {processedContent.map((Unit) => {
       return Unit;
     },
     )}

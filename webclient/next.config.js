@@ -9,14 +9,16 @@ module.exports = {
     defaultLocale: 'ru',
   },
   distDir: '.next',
-  async rewrites() {
+  async redirects() {
     return [
       {
         source: '/',
         destination: '/main',
+        permanent: true,
       }, {
         source: '/data/:slug*',
         destination: '/v1/content/files/:slug*',
+        permanent: true,
       },
     ];
   },

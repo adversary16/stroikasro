@@ -58,10 +58,7 @@ exports.getPageById = async ({id}) => {
 exports.getPageByRouteName = async ({route}) => {
   const [primary, secondary, ...rest] = route;
   const primaryOrIndexQuery = primary ?
-  {link: primary} : {isIndex: true};
-
-  console.log(primaryOrIndexQuery);
-
+  {link: primary} : {link: 'main'};
   const filter = secondary ?
   [
     {$match: {link: secondary}},
@@ -122,7 +119,7 @@ exports.getPageByRouteName = async ({route}) => {
       childPages: '$childPages',
     }},
   ]);
-  requestedPage.content.reverse();
+  requestedPage && requestedPage.content.reverse();
   return requestedPage;
 };
 

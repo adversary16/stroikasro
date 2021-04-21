@@ -2,6 +2,7 @@ import React, {useEffect} from 'react';
 import App, {Container} from 'next/app';
 import '../styles/remote.scss';
 import '../styles/styles.css';
+import Head from 'next/head';
 import BasicContainer from '../containers/BasicContainer';
 import styles from '../styles/remote.scss';
 import Header from '../components/Header/Header';
@@ -10,7 +11,7 @@ import Sidebar from '../components/Sidebar/Sidebar';
 import {AuthContext, AuthContextProvider} from '../contexts/AuthContext';
 import {useCookies} from 'react-cookie';
 import {useRequest} from '../hooks/useRequest';
-import {API_URLS} from '../const/const';
+import {API_URLS, SITE_NAME} from '../const/const';
 import cookies from 'next-cookies';
 import FooterContainer from '../containers/Footer';
 
@@ -22,21 +23,27 @@ function SafeHydrate({children}) {
   );
 }
 
-const MyApp = ({Component, pageProps}) => {
+const MyApp = (props) => {
+  const {Component, pageProps} = props;
+  const title = pageProps.content ? pageProps.content.alias : null;
   return (
     <SafeHydrate>
       <AuthContextProvider>
-        <RouterContextProvider>
-          <Header/>
+        <RouterContextProvider {...pageProps}>
+          <Head>
+            <title>{SITE_NAME} {title}</title>
+          </Head>
+          <Header {...pageProps}/>
           <BasicContainer>
             <Component {...pageProps}/>
           </BasicContainer>
-          <Sidebar/>
+          <Sidebar {...pageProps}/>
           <FooterContainer/>
         </RouterContextProvider>
       </AuthContextProvider>
     </SafeHydrate>
   );
 };
+
 
 export default MyApp;
