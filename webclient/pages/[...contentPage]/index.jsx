@@ -13,6 +13,8 @@ const ContentPage = (props) => {
 
 export async function getServerSideProps(context) {
   const {contentPage} = context.query;
+  const {cookie} = context.req.headers;
+  const {token} = Object.fromEntries(new URLSearchParams(cookie));
   const url = `${SERVERSIDE_BASEURL}/content`;
   const method = 'post';
   const headers = {
@@ -29,6 +31,7 @@ export async function getServerSideProps(context) {
     props: {
       content,
       asPath: contentPage[0],
+      token,
     },
   };
 }

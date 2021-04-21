@@ -9,7 +9,7 @@ const RouterContext = React.createContext({});
 const RouterContextProvider = (props) => {
   const {children, content} = props;
   const router = useRouter();
-  const {isLoggedIn} = useContext(AuthContext);
+  const {isLoggedIn, authToken: token} = useContext(AuthContext);
   const [activePage, setActivePage] = useState(content);
   const {
     asPath: rawAsPath,
@@ -21,7 +21,6 @@ const RouterContextProvider = (props) => {
   const asPath = deconstructedPath[1];
   const subPath = deconstructedPath.splice(1, deconstructedPath.length -1);
   const {childPages} = navStructure[asPath] || {};
-
   const {
     actions: {sendQuery: getContent},
     state: {result},
@@ -29,6 +28,7 @@ const RouterContextProvider = (props) => {
     url: `${BASEURL}/${SECURE_ROUTES.includes(asPath) ? asPath : 'content/'}`,
     method: 'POST',
     body: asPath,
+    token,
   });
 
   const {
@@ -42,6 +42,7 @@ const RouterContextProvider = (props) => {
     url: `${BASEURL}/content/structure`,
     method: 'GET',
     data: '',
+    token,
   });
 
   const [structure, setStructure] = useState([]);

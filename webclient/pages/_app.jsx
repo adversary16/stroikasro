@@ -26,10 +26,11 @@ function SafeHydrate({children}) {
 
 const MyApp = (props) => {
   const {Component, pageProps} = props;
+  const {token} = pageProps;
   const title = pageProps.content ? pageProps.content.alias : null;
   return (
     <SafeHydrate>
-      <AuthContextProvider>
+      <AuthContextProvider token={token}>
         <RouterContextProvider {...pageProps}>
           <Head>
             <title>{SITE_NAME} {title}</title>

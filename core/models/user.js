@@ -43,6 +43,7 @@ userSchema.methods.generateToken = function() {
 
   return jwt.sign({
     id: this._id,
+    user: this._id,
     exp: parseInt(expirationDate.getTime() / 1000, 10),
     iss: JWT_ISSUER,
   }, JWT_TOKEN);

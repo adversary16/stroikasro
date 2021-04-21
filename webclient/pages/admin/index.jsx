@@ -1,8 +1,36 @@
 import React from 'react';
+import {SERVERSIDE_BASEURL} from '../../const/const';
 import {AdminContainer} from '../../containers';
 
-function HomePage() {
-  return <AdminContainer>Welcome to admin!</AdminContainer>;
+function Admin(props) {
+  return <AdminContainer {...props}/>;
 }
 
-export default HomePage;
+export async function getServerSideProps(context) {
+  const {cookie} = context.req.headers;
+  const token = cookie.split('token=').splice(-1, 1);
+  const url = `${SERVERSIDE_BASEURL}/admin/getDashboard`;
+
+  const method = 'post';
+  const headers = {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+    'Authorization': token,
+  };
+  const body = JSON.stringify({route: context.query.contentPage});
+  const getPage = await fetch(url, {
+    method, headers, body,
+  });
+  const content = await getPage.json();
+
+  return {
+    props: {
+      content,
+      token,
+      cookie,
+    },
+  };
+}
+
+
+export default Admin;

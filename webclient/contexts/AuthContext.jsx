@@ -7,17 +7,19 @@ import {useCookies} from 'react-cookie';
 const AuthContext = React.createContext();
 
 
-const AuthContextProvider = ({children}) => {
+const AuthContextProvider = (props) => {
+  const {children, token} = props;
   const [cookies, setCookie, removeCookie] = useCookies(['stroikasro']);
   const [isLoggedIn, setIsloggedIn] = useState((cookies.token !== undefined));
-  const [authToken, setAuthToken] = useState(cookies.token);
+  const [authToken, setAuthToken] = useState(token);
   const {
     actions: {sendQuery: logonQuery, setAuthToken: setToken},
     state: {result: logonResult},
   } = useRequest({
     url: API_URLS.LOGON,
-    data: {},
-    method: 'POST'},
+    data: {token},
+    method: 'POST',
+    token},
   );
   useEffect(() => {
     if (logonResult && logonResult.token) {

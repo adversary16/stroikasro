@@ -2,9 +2,9 @@ import {useCallback, useContext, useEffect, useState} from 'react';
 import {AuthContext} from '../contexts/AuthContext';
 
 
-export const useRequest = ({data, method, url}) => {
+export const useRequest = ({data, method, url, token}) => {
   const [result, setResult] = useState(null);
-  const [authToken, setAuthToken] = useState(null);
+  const [authToken, setAuthToken] = useState(token);
   const sendQuery = useCallback( async ({body} = data) => {
     const headers = {
       'Accept': 'application/json',
