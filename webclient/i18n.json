@@ -5,6 +5,10 @@
     "*": ["common"],
     "/main": ["common"],
     "/about": ["about"],
-    "/roster": ["common"]
+    "/roster": ["common"],
+    "/admin": ["admin"],
+    "/admin/edit": ["admin"],
+    "/admin/roster": ["admin"],
+    "/admin/structure": ["admin"]
   }
 }

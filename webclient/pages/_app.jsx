@@ -23,6 +23,7 @@ function SafeHydrate({children}) {
   );
 }
 
+
 const MyApp = (props) => {
   const {Component, pageProps} = props;
   const title = pageProps.content ? pageProps.content.alias : null;
@@ -34,9 +35,7 @@ const MyApp = (props) => {
             <title>{SITE_NAME} {title}</title>
           </Head>
           <Header {...pageProps}/>
-          <BasicContainer>
-            <Component {...pageProps}/>
-          </BasicContainer>
+          <Component {...pageProps}/>
           <Sidebar {...pageProps}/>
           <FooterContainer/>
         </RouterContextProvider>
