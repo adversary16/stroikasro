@@ -38,3 +38,9 @@
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   color: var(--white)
 }
+
+@media (orientation: portrait){
+  .banner{
+    width: 40rem;
+  }
+}
