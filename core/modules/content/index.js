@@ -161,6 +161,53 @@ exports.getStructure = async () => {
   return Object.values(structure);
 };
 
+exports.getFullStructureTree = async () => {
+  const structure = await Route.aggregate([
+    {$match:
+      {
+        page: {$exists: true},
+      },
+    },
+    {$lookup: {
+      from: 'pages',
+      localField: 'page',
+      foreignField: '_id',
+      as: 'page',
+    },
+    },
+    {$group: {
+      _id: '$parent',
+      children: {
+        $push: {
+          link: '$link',
+          alias: '$alias',
+          menuOrder: '$menuOrder',
+          isIndex: '$isIndex',
+          _id: '$_id',
+        },
+      },
+    }},
+    {
+      $lookup: {
+        from: 'routes',
+        localField: '_id',
+        foreignField: '_id',
+        as: 'parent',
+      },
+    },
+    {
+      $unwind: {
+        path: '$parent',
+        preserveNullAndEmptyArrays: true},
+    },
+    {$sort: {
+      menuOrder: 1,
+    },
+    },
+  ]);
+  return Object.values(structure);
+};
+
 exports.createOrUpdateMediaFiles = async ({files}) => {
   const updatedFilesIds = files.reduce(async (acc, file) => {
     const tempFile = await createTemporaryFile(file);
