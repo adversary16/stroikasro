@@ -27,7 +27,6 @@ export async function getServerSideProps(context) {
     props: {
       content,
       token,
-      cookie,
     },
   };
 }
