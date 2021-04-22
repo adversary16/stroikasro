@@ -8,7 +8,7 @@ function Admin(props) {
 
 export async function getServerSideProps(context) {
   const {cookie} = context.req.headers;
-  const token = cookie.split('token=').splice(-1, 1);
+  const token = cookie ? cookie.split('token=').splice(-1, 1) : null;
   const url = `${SERVERSIDE_BASEURL}/admin/getDashboard`;
 
   const method = 'post';
