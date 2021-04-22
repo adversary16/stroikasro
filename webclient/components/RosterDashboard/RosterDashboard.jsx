@@ -1,6 +1,10 @@
 import React from 'react';
 import styles from './RosterDashboard.module.scss';
-const RosterDashboard = () => {
-  return <div className={styles.root}></div>;
+const RosterDashboard = ({t}) => {
+  return <div className={styles.root}>
+    <div className={styles.header}>
+      {t('previewHeader')}
+    </div>
+  </div>;
 };
 export default RosterDashboard;

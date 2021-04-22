@@ -12,7 +12,7 @@ const AdminContainer = ({children, content, token}) => {
     <AdminNavMenu t={t}/>
     <div className={styles.root}>
       <StructureDashboard { ...{structure, t}}/>
-      <RosterDashboard/>
+      <RosterDashboard {...{t}}/>
     </div>
   </>;
 };

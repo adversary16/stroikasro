@@ -6,10 +6,12 @@ import handleLogon from '../../utils/logon';
 import waitForKey from '../../utils/waitForKey';
 import {AuthContext} from '../../contexts/AuthContext';
 import {getFormValues} from '../../helpers/getFormValues';
+import {useRouter} from 'next/dist/client/router';
 
 const Logonbox = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [creds, setCreds] = useState({});
+  const router = useRouter();
   const {logonQuery, authToken, isLoggedIn} = useContext(AuthContext);
   const logonForm = useRef(null);
   const loginOnEnter = waitForKey.bind(this,
@@ -54,7 +56,9 @@ const Logonbox = () => {
     <div
       className={classNames(styles.icon, isLoggedIn && styles.authorized)}
       onClick = {()=>{
-        setIsPopupOpen(!isPopupOpen);
+        isLoggedIn ?
+        router.push('/admin') :
+       setIsPopupOpen(!isPopupOpen);
       }}
     ></div>
   </div>;

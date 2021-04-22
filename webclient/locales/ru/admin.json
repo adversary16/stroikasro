@@ -2,5 +2,6 @@
   "structure": "Структура",
   "content": "Контент",
   "roster": "Реестр СРО",
-  "structureHeader": "Структура сайта"
+  "structureHeader": "Структура сайта",
+  "previewHeader": "Предварительный просмотр"
 }

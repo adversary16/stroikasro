@@ -16,6 +16,11 @@ const getChildren = ({_id, structure}) => {
   return matching || {children: null};
 };
 
+const getContent = async (event) => {
+  const {id: contentId} = event.target;
+  console.log(contentId);
+};
+
 const StructureDashboard = ({structure, t}) => {
   const rootItems = getRootItems({structure});
 
@@ -30,13 +35,13 @@ const StructureDashboard = ({structure, t}) => {
             className={styles.entry}
             key={v4()}
           >
-            <div className={styles.main}>
+            <div className={styles.main} id={_id} onClick={getContent}>
               <span className={styles.alias}>{alias}</span>
               <span className={styles.link}>{link}</span>
             </div>
             {
               children &&
-              <div className={styles.sublist}>
+              <div className={styles.sublist} id={_id} onClick={getContent}>
                 {
                   children.map(({link, alias}) =>
                     <div
