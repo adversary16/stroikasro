@@ -22,3 +22,9 @@
     height: 0px;
     margin: 4rem 0 0 0;
 }
+
+@media (orientation: portrait){
+    .separator{
+        margin: 1rem;
+    }
+}

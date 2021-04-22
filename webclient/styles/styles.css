@@ -59,5 +59,15 @@ html {
       [main-top-left] "side main main main ." 1fr [main-top-right]
       [main-bottom-left] "side main main main ." 1fr [main-bottom-right]
       [footer-left] "foot foot foot foot foot" auto [footer-right]
-      / auto 1fr 1fr 1fr auto;
+      / auto auto auto auto auto;
+}
+
+@media (orientation: portrait){
+  body{
+    width: 40rem;
+  }
+  #__nossr{
+    display: flex;
+    flex-direction: column;
+  }
 }
