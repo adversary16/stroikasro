@@ -1,0 +1,38 @@
+.root{
+  grid-area: main;
+  display: flex;
+  flex-direction: column;
+
+  .table{
+    display: flex;
+    flex-direction: column;
+
+    .row:nth-child(odd){
+      background-color: var(--gray-very-light);
+    }
+    .row{
+      display: flex;
+      flex-direction: column;
+      height: 3rem;
+      margin-bottom: 1rem;
+      .cardheader {
+        display: flex;
+        flex-direction: column;
+        .title, .subtitle{
+          display: flex;
+          width: 100%;
+        }
+        .title{
+          font-size: 1.2rem;
+          justify-content: space-between;
+        }
+        .active {
+          background-color: green;
+        }
+        .inactive {
+          background-color: red;
+        }
+      }
+    }
+  }
+}

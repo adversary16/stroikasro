@@ -1,9 +1,18 @@
 import useTranslation from 'next-translate/useTranslation';
+import {default as members} from '../../const/ooo.json';
+import {RosterContainer} from '../../containers/RosterContainer';
 
-function HomePage() {
+function Roster(props) {
   const {t} = useTranslation('common');
-  console.log(t('test'));
-  return <div>Welcome to Next.js!</div>;
+  return <RosterContainer { ...{...props, t}}/>;
 }
 
-export default HomePage;
+export async function getServerSideProps(context) {
+  return {
+    props: {
+      members,
+    },
+  };
+}
+
+export default Roster;

@@ -3,6 +3,7 @@ import {v4} from 'uuid';
 import styles from './StructureDashboard.module.scss';
 
 const getRootItems = ({structure}) => {
+  console.log(structure);
   const {children: rootItems} = structure.find(({_id}) => _id === null);
   const getTree = rootItems.map((item) => {
     const {children} = getChildren({_id: item._id, structure});

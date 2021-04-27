@@ -1,0 +1,92 @@
+[
+  {
+    "shortname": "Выдра в каске",
+    "type": "1",
+    "ownership": "1",
+    "longname": "Выдра в каске",
+    "inn": "1231231231",
+    "ogrn": "09129371234",
+    "active": true
+  },
+  {
+    "shortname": "Сладкий хлеб",
+    "type": "1",
+    "ownership": "1",
+    "longname": "Сладкий хлеб",
+    "inn": "1231231231",
+    "ogrn": "09129371234",
+    "active": true
+  },
+  {
+    "shortname": "ЛГБТ-строй",
+    "type": "1",
+    "ownership": "2",
+    "longname": "Ленинградское Геодезическое Бюро Технологий",
+    "inn": "1231231231",
+    "ogrn": "09129371234",
+    "active": true
+  },
+  {
+    "shortname": "Равшан и Джамшут",
+    "type": "1",
+    "ownership": "1",
+    "longname": "Равшан и Джамшут",
+    "inn": "1231231231",
+    "ogrn": "09129371234",
+    "active": true
+  },
+  {
+    "shortname": "Shit&Sticks",
+    "type": "1",
+    "ownership": "1",
+    "longname": "Shit and Sticks International Limited",
+    "inn": "1231231231",
+    "ogrn": "09129371234",
+    "active": true
+  },
+  {
+    "shortname": "ЫГА-ЫГА-ЫЦ",
+    "type": "1",
+    "ownership": "1",
+    "longname": "Проектное бюро кыргызского землячества имени юрты Чингисхана",
+    "inn": "1231231231",
+    "ogrn": "09129371234",
+    "active": true
+  },
+  {
+    "shortname": "Синебол-проект",
+    "type": "1",
+    "ownership": "1",
+    "longname": "Творческое объединение архитекторов и наркологов 'Пьяный Мастер' ",
+    "inn": "1231231231",
+    "ogrn": "09129371234",
+    "active": true
+  },
+  {
+    "shortname": "Эдельвейс",
+    "type": "1",
+    "ownership": "1",
+    "longname": "Эдельвейс",
+    "inn": "1231231231",
+    "ogrn": "09129371234",
+    "active": true
+  },
+  {
+    "shortname": "Лабеан-констракт",
+    "type": "1",
+    "ownership": "1",
+    "longname": "Лабеан-констракт",
+    "inn": "1231231231",
+    "ogrn": "09129371234",
+    "active": true
+  },
+  {
+    "shortname": "Всё идёт по плану",
+    "type": "1",
+    "ownership": "1",
+    "longname": "",
+    "inn": "1231231231",
+    "ogrn": "09129371234",
+    "active": false
+  }
+]
