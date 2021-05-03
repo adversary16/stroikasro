@@ -1,14 +1,21 @@
 body {
     height: fit-content;
     min-height: 100vh;
-    font-family: "Segoe UI","Helvetica Neue","Helvetica",Arial,sans-serif;
+    font-family: "Roboto";
     font-size: 14px;
     position: absolute;
     width: 100%;
     margin: 0;
 }
 
+input:focus, textarea:focus, select:focus{
+  outline: none;
+}
 
+input {
+  border: 1px solid var(--secondary);
+  text-indent: 1rem;
+}
 body::-webkit-scrollbar {
     width: 0.3rem;
     height: 0.3rem;

@@ -26,27 +26,57 @@ const TableRow = (props) => {
           className={
           active ? styles.active :
           styles.inactive }
-        >{statusCaption}</span>
+        ></span>
       </div>
       <div className={styles.subitle}>
         {fullTitle}
       </div>
     </div>
     <div className={styles.cardBody}>
-      {inn}
-      {ogrn}
+      <span className={styles.inn}>{t('inn', {inn})}</span>
+      <span className={styles.ogrn}>{t('ogrn', {ogrn})}</span>
     </div>
   </div>;
 };
 
 const Roster = ({members, t}) => {
   const [membersList, setMembersList] = useState(members);
+
+  const handleSearch = ({target: {value}}) => {
+    setMembersList((prevstate) => {
+      if (!value) return members;
+      const mutableClone = [...members];
+      const filteredItems = mutableClone.filter(
+          ({longname, shortname, inn, ogrn}) => {
+            const searchString = new RegExp(
+                `.*${value.replace(/\W/, '')}.*`
+                , 'gmi');
+            const isMatching = [
+              longname,
+              shortname,
+              inn,
+              ogrn,
+            ].reduce((acc, item) => {
+              return item.match(searchString) || acc;
+            }, false);
+            return isMatching;
+          },
+      );
+      return filteredItems;
+    },
+    );
+  };
+
   return <div className={styles.root}>
     <div className={styles.header}>
       {t('rosterTitle')}
     </div>
     <div className={styles.searchBar}>
-      <input type='text'/>
+      <input
+        type='text'
+        onChange={handleSearch}
+        placeholder={t('rostersearch')}
+      />
     </div>
     <div className={styles.table}>
       {

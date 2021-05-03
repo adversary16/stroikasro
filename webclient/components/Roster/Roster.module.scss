@@ -2,37 +2,100 @@
   grid-area: main;
   display: flex;
   flex-direction: column;
+  width: 100%;
+  
+  .header{
+    display: block;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: var(--primary);
+    margin-top: 2rem;
+  }
+
+  .searchBar { 
+    width: 90rem;
+    margin: 2rem auto;
+    input {
+    height: 3rem;
+    width: 100%;
+    display: block;
+    line-height: 3rem;
+    font-size: 1.5rem;
+    border-radius: 1.5rem;
+  }
+}
 
   .table{
     display: flex;
     flex-direction: column;
-
+    width: 90rem;
+    margin: 0 auto;
     .row:nth-child(odd){
       background-color: var(--gray-very-light);
     }
     .row{
       display: flex;
       flex-direction: column;
-      height: 3rem;
-      margin-bottom: 1rem;
+      margin-bottom: 2rem;
+      padding: 1rem;
+
       .cardheader {
         display: flex;
         flex-direction: column;
-        .title, .subtitle{
+        
+        .title {
           display: flex;
           width: 100%;
+        }
+        .subtitle{
+          display: block;
+          min-width: 100%;
         }
         .title{
           font-size: 1.2rem;
           justify-content: space-between;
         }
-        .active {
+        .active, .inactive {
+          background-size: 2rem;
+          background-repeat: no-repeat;
+          background-position: center;
+          border-radius: 2rem;
+          height: 2rem;
+          width: 2rem;
+        }
+        .active{
+          background-image: var(--icon-checked);
           background-color: green;
         }
         .inactive {
+          background-image: var(--icon-cross);
           background-color: red;
         }
       }
     }
+  }
+}
+
+.cardBody{
+  display: flex;
+  margin: 1rem 0 0 0;
+.inn,
+.ogrn {
+  margin: 1rem;
+  background-color: var(--secondary-light);
+  border-radius: 5px;
+  font-weight: bold;
+  color: var(--primary);
+  padding: 0.5rem;
+}}
+
+@media screen and (max-width: 720px) {
+  .root{
+    width: 30rem;
+    margin: 4rem auto;
+  }
+  .searchBar, .table {
+    width: 100% !important;
   }
 }

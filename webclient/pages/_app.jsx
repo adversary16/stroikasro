@@ -2,6 +2,7 @@ import React, {useEffect} from 'react';
 import App, {Container} from 'next/app';
 import '../styles/remote.scss';
 import '../styles/styles.css';
+import '../styles/icons.scss';
 import Head from 'next/head';
 import BasicContainer from '../containers/BasicContainer';
 import styles from '../styles/remote.scss';
