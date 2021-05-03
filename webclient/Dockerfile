@@ -1,5 +1,6 @@
 FROM node:14.14.0-alpine
 
+ARG BASEURL
 RUN mkdir /app
 WORKDIR /app
 

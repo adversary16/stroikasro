@@ -46,6 +46,7 @@ services:
       - core
     links:
       - core
+    env_file: ./env.local
 
 
 networks:
