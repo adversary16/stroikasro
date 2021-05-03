@@ -7,6 +7,7 @@ const {
   JWT_ISSUER,
   JWT_TOKEN,
 } = require('../const');
+const {ROLES} = require('../const/constants');
 
 const Schema = mongoose.Schema;
 
@@ -22,6 +23,14 @@ const userSchema = new Schema({
   },
   password: {
     type: String,
+  },
+  profile: {
+    type: Schema.Types.ObjectId,
+    ref: 'Profile',
+  },
+  role: {
+    type: String,
+    enum: [...Object.values(ROLES)],
   },
 });
 

@@ -1,0 +1,39 @@
+.button{
+  width: 2rem;
+  height: 2rem;
+  background-color: var(--secondary);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 2rem;
+  border-radius: 1rem;
+  margin: 0 0.2rem;
+  cursor: pointer;
+  &:hover{
+    background-color: var(--primary);
+  }
+}
+
+.plusButton {
+  background-image: var(--icon-plus)
+}
+
+.searchButton {
+  background-image: var(--icon-search);
+  background-size: 1.5rem;
+}
+
+.filterButton {
+  background-image: var(--icon-filter);
+  background-size: 1.5rem;
+}
+
+.editButton {
+  background-image: var(--icon-edit);
+  background-size: 1.5rem;
+}
+
+.deleteButton {
+  background-image: var(--icon-delete);
+  background-color: red;
+  background-size: 1.5rem;
+}

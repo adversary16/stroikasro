@@ -10,8 +10,22 @@ import {useRouter} from 'next/dist/client/router';
 import {UserMenu} from '../UserMenu';
 
 const LogOnForm = () => {
+  const logonForm = useRef(null);
+  const [creds, setCreds] = useState({});
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const {logonQuery, authToken, isLoggedIn} = useContext(AuthContext);
+  const loginOnEnter = waitForKey.bind(this,
+      {
+        targetRef: logonForm,
+        preventDefault: true,
+        keyCode: 13,
+        callback: logonQuery,
+        args: {body: {...creds}},
+      });
+  const handleChange = (e) => {
+    const {name, value} = e.target;
+    setCreds({...creds, [name]: value});
+  };
   return <>
     {
       isPopupOpen &&
@@ -25,17 +39,20 @@ const LogOnForm = () => {
           onChange={handleChange}
           name='username'
           type="text"
+          tabIndex={0}
           className={styles.login}>
         </input>
         <input
           onChange={handleChange}
           name='password'
           type="password"
+          tabIndex={1}
           className={styles.password}>
         </input>
       </form>}
     <div
       className={classNames(styles.icon, isLoggedIn && styles.authorized)}
+      tabIndex={2}
       onClick = {()=>{
         isLoggedIn ?
         router.push('/admin') :
@@ -50,22 +67,6 @@ const Logonbox = () => {
   const [creds, setCreds] = useState({});
   const router = useRouter();
   const {logonQuery, authToken, isLoggedIn} = useContext(AuthContext);
-  const logonForm = useRef(null);
-  const loginOnEnter = waitForKey.bind(this,
-      {
-        targetRef: logonForm,
-        preventDefault: true,
-        keyCode: 13,
-        callback: logonQuery,
-        args: {body: {...creds}},
-      });
-
-  const handleChange = (e) => {
-    const {name, value} = e.target;
-    setCreds({...creds, [name]: value});
-  };
-
-
   return <div className={
     classNames(styles.logonbox_root)
   }>

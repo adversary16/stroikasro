@@ -5,9 +5,9 @@ const AdminNavMenu = ({t}) => {
   return <div
     className={styles.root}
   >
-    <a href="/admin/structure">
+    {/* <a href="/admin/structure">
       {t('structure')}
-    </a>
+    </a> */}
     <a href="/admin/roster">
       {t('roster')}
     </a>

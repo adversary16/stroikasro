@@ -1,22 +1,30 @@
 .root {
   width: 100%;
-  min-width: 25rem;
   height: calc(100% - 2rem);
   margin: auto;
   box-shadow: 0 0 1.5rem -0.2rem rgba(136, 136, 136, 0.34);
-  display: flex;
-  flex-direction: column;
-  .buttons {
-    display: flex;
-  }
+  display: block;
+
   .header{
     width: 100%;
-    height: 2rem;
     font-size: 1.5rem;
     font-weight: bold;
     padding: 1rem;
-      display: flex;
-      justify-content: space-between;
+    display: flex;
+    justify-content: space-between;
+  }
+  .buttons{
+    display: flex;
+  }
+  .placeholder{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    padding: 2rem;
+    text-align: center;
+    align-items: center;
+    color: var(--secondary-light);
   }
   .list{
     display: flex;
@@ -33,24 +41,6 @@
       color: var(--secondary);
       margin: 1rem 0 0 0;
       border-radius: 0.5rem;
-      white-space: wrap;
-      text-overflow: ellipsis;
-      .addChild {
-        height: 0;
-        width: 0;
-        background-size: 1.5rem;
-        background-color: var(--secondary-light);
-        transition: height 0.5s;
-        margin: 0 auto;
-      }
-      &:hover{
-        .addChild {
-          width: 80%;
-          height: 1.5rem;
-          transition: margin height 0.5s;
-          margin: 1rem auto;
-        }
-      }
       .main{
         display: flex;
         width: 100%;

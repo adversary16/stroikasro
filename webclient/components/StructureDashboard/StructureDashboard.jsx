@@ -1,6 +1,8 @@
-import React from 'react';
+import React, {useState} from 'react';
+import Link from 'next/link';
 import {v4} from 'uuid';
 import styles from './StructureDashboard.module.scss';
+import {AddButton, DeleteButton, EditButton} from '../Buttons/Buttons';
 
 const getRootItems = ({structure}) => {
   console.log(structure);
@@ -22,12 +24,23 @@ const getContent = async (event) => {
   console.log(contentId);
 };
 
+const AddItem = ({onClick}) => {
+  return <AddButton className={styles.addChild} onClick={onClick}/>;
+};
+
 const StructureDashboard = ({structure, t}) => {
+  const [isEditingMode, setIsEditingMode] = useState(false);
+  const toggleEditingMode = () =>
+    setIsEditingMode((isEditingMode) => !isEditingMode);
   const rootItems = getRootItems({structure});
 
   return <div className={styles.root}>
     <div className={styles.header}>
       {t('structureHeader')}
+      <div className={styles.buttons}>
+        <EditButton onClick={toggleEditingMode}/>
+        <AddButton/>
+      </div>
     </div>
     <div className={styles.list}>
       {
@@ -36,28 +49,35 @@ const StructureDashboard = ({structure, t}) => {
             className={styles.entry}
             key={v4()}
           >
-            <div className={styles.main} id={_id} onClick={getContent}>
-              <span className={styles.alias}>{alias}</span>
-              <span className={styles.link}>{link}</span>
+            <div className={styles.main} id={_id}>
+              <Link href={`/admin/edit/${_id}`}>
+                <>
+                  <span className={styles.alias}>{alias}</span>
+                  <span className={styles.link}>{link}</span>
+                </>
+              </Link>
+              { isEditingMode && <DeleteButton/>}
             </div>
             {
               children &&
-              <div className={styles.sublist} id={_id} onClick={getContent}>
+              <div className={styles.sublist}>
                 {
-                  children.map(({link, alias}) =>
-                    <div
-                      className={styles.subentry}
-                      key={v4()}
-                    >
-                      <span className={styles.alias}>{alias}</span>
-                      <span className={styles.link}>{link}</span>
-                    </div>,
+                  children.map(({link, _id, alias}) =>
+                    <Link href={`/admin/edit/${_id}`} key={link}>
+                      <div
+                        className={styles.subentry}
+                        id={_id}
+                      >
+                        <span className={styles.alias}>{alias}</span>
+                        <span className={styles.link}>{link}</span>
+                      </div>
+                    </Link>,
 
                   )
                 }
               </div>
             }
-
+            <AddItem/>
           </div>,
         )}
 

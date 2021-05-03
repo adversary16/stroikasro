@@ -2,6 +2,9 @@
   "structure": "Структура",
   "content": "Контент",
   "roster": "Реестр СРО",
-  "structureHeader": "Структура сайта",
-  "previewHeader": "Предварительный просмотр"
+  "structureHeader": "Разделы",
+  "previewHeader": "Контент",
+  "previewPlaceholder": "Пожалуйста, выберите раздел, чтобы увидеть и отредактировать его содержание",
+  "usersHeader": "Пользователи",
+  "rosterHeader": "Организации"
 }
