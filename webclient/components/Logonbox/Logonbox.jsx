@@ -7,31 +7,12 @@ import waitForKey from '../../utils/waitForKey';
 import {AuthContext} from '../../contexts/AuthContext';
 import {getFormValues} from '../../helpers/getFormValues';
 import {useRouter} from 'next/dist/client/router';
+import {UserMenu} from '../UserMenu';
 
-const Logonbox = () => {
+const LogOnForm = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const [creds, setCreds] = useState({});
-  const router = useRouter();
   const {logonQuery, authToken, isLoggedIn} = useContext(AuthContext);
-  const logonForm = useRef(null);
-  const loginOnEnter = waitForKey.bind(this,
-      {
-        targetRef: logonForm,
-        preventDefault: true,
-        keyCode: 13,
-        callback: logonQuery,
-        args: {body: {...creds}},
-      });
-
-  const handleChange = (e) => {
-    const {name, value} = e.target;
-    setCreds({...creds, [name]: value});
-  };
-
-
-  return <div className={
-    classNames(styles.logonbox_root)
-  }>
+  return <>
     {
       isPopupOpen &&
       <form className={styles.logon}
@@ -61,6 +42,37 @@ const Logonbox = () => {
        setIsPopupOpen(!isPopupOpen);
       }}
     ></div>
+  </>;
+};
+
+const Logonbox = () => {
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [creds, setCreds] = useState({});
+  const router = useRouter();
+  const {logonQuery, authToken, isLoggedIn} = useContext(AuthContext);
+  const logonForm = useRef(null);
+  const loginOnEnter = waitForKey.bind(this,
+      {
+        targetRef: logonForm,
+        preventDefault: true,
+        keyCode: 13,
+        callback: logonQuery,
+        args: {body: {...creds}},
+      });
+
+  const handleChange = (e) => {
+    const {name, value} = e.target;
+    setCreds({...creds, [name]: value});
+  };
+
+
+  return <div className={
+    classNames(styles.logonbox_root)
+  }>
+    { isLoggedIn ?
+    <UserMenu/> :
+    <LogOnForm/>
+    }
   </div>;
 };
 
