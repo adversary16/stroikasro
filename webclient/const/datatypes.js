@@ -7,26 +7,21 @@ export const ORGANIZATION = {
     type: 'text',
     default: '',
   },
-  type: {
-    type: 'enum',
-    default: 1,
-    values: [1, 2],
-  },
   ownership: {
     type: 'enum',
     default: 1,
     values: [1, 2],
   },
   inn: {
-    type: 'text',
+    type: 'number',
     default: '',
   },
   ogrn: {
-    type: 'text',
+    type: 'number',
     default: '',
   },
   active: {
-    type: 'bool',
+    type: 'boolean',
     default: true,
   },
 };

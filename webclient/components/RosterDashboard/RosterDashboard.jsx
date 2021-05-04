@@ -8,7 +8,7 @@ import styles from './RosterDashboard.module.scss';
 const RosterEditPopup = ({hidePopup}) => {
   return <Modal
     onClickOutside={hidePopup}>
-    <AddCompanyForm/>
+    <AddCompanyForm onDone={hidePopup}/>
   </Modal>;
 };
 
@@ -18,7 +18,7 @@ const CompanyEntry = ({company, t}) => {
   return <div className={styles.entry}>
     <div className={styles.main}>
       <span className={styles.companyname}>
-        {c(`ownership.${type}.withName`, {shortname})}
+        {c(`ownership.${ownership}.withName`, {shortname})}
       </span>
     </div>
   </div>;

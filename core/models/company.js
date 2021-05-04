@@ -11,11 +11,6 @@ const companySchema = new Schema({
     required: false,
     unique: true,
   },
-  type: {
-    type: Number,
-    required: true,
-    enum: [1, 2, 3],
-  },
   ownership: {
     type: Number,
     required: true,
