@@ -4,6 +4,10 @@ import {API_URLS} from '../const/const';
 import {useRequest} from '../hooks/useRequest';
 import {useCookies} from 'react-cookie';
 
+const COOKIES_OPTIONS = {
+  path: '/',
+};
+
 const AuthContext = React.createContext();
 
 
@@ -30,7 +34,7 @@ const AuthContextProvider = (props) => {
 
   useEffect(() => {
     if (authToken) {
-      setCookie('token', authToken);
+      setCookie('token', authToken, COOKIES_OPTIONS);
       setIsloggedIn(true);
     }
   }, [authToken]);

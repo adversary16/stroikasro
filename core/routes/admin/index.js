@@ -7,6 +7,7 @@ const router = express.Router();
 
 router.use('/content', contentEditorRoutes);
 router.post('/getDashboard', async (req, res) => {
+  console.log('123123');
   const structure = await getFullStructureTree();
   const users = await getAllUsers();
   const roster = {};
