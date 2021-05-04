@@ -9,7 +9,8 @@ import {EditContentContextProvider} from '../contexts/EditContentContext';
 import {UsersDashboard} from '../components/UsersDashboard';
 
 const AdminContainer = ({children, content, token}) => {
-  const {structure, roster, users} = content;
+  const {structure, companies, users} = content;
+  console.log(content);
   const {t} = useTranslation('admin');
   return <>
     <EditContentContextProvider>
@@ -17,7 +18,7 @@ const AdminContainer = ({children, content, token}) => {
       <div className={styles.root}>
         <StructureDashboard { ...{structure, t}}/>
         {/* <ContentPreview {...{t}}/> */}
-        <RosterDashboard {...{t}}/>
+        <RosterDashboard {...{t, companies}}/>
         <UsersDashboard {...{t, users}}/>
       </div>
     </EditContentContextProvider>

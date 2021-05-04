@@ -6,7 +6,7 @@
     "/main": ["common"],
     "/about": ["about"],
     "/roster": ["common"],
-    "/admin": ["admin"],
+    "/admin": ["admin", "datatypes"],
     "/admin/edit": ["admin"],
     "/admin/roster": ["admin"],
     "/admin/structure": ["admin"]

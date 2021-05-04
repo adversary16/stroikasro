@@ -1,7 +1,12 @@
 import React, {useState} from 'react';
 import styles from './UsersDashboard.module.scss';
 import classNames from 'classnames';
-import {AddButton, FilterButton, SearchButton} from '../../components/Buttons/Buttons';
+import {
+  AddButton,
+  FilterButton,
+  SearchButton,
+} from '../../components/Buttons/Buttons';
+import {Modal} from '../Modal';
 
 const PlaceHolder = ({t}) => {
   return <div className={styles.placeholder}>

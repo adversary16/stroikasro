@@ -1,0 +1,33 @@
+.dialogContainer {
+  z-index: 999999;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0,0,0,0.5);
+}
+
+.container {
+  padding: 2rem;
+  border-radius: 0.5rem;
+  box-shadow: rem(0 30px 100px -10px) rgba(5, 39, 72, 0.5);
+  position: relative;
+  background-color: var(--white);
+  border: 0.4rem solid var(--secondary);
+}
+
+.closeIconContainer {
+  position: absolute;
+  top: rem(16px);
+  right: rem(16px);
+  width: rem(24px);
+  height: rem(24px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}

@@ -15,6 +15,7 @@ import {useRequest} from '../hooks/useRequest';
 import {API_URLS, SITE_NAME} from '../const/const';
 import cookies from 'next-cookies';
 import FooterContainer from '../containers/Footer';
+import {ModalRoot} from '../components/ModalRoot';
 
 function SafeHydrate({children}) {
   return (
@@ -30,19 +31,30 @@ const MyApp = (props) => {
   const {token} = pageProps;
   const title = pageProps.content ? pageProps.content.alias : null;
   return (
-    <SafeHydrate>
-      <AuthContextProvider token={token}>
-        <RouterContextProvider {...pageProps}>
-          <Head>
-            <title>{SITE_NAME} {title}</title>
-          </Head>
-          <Header {...pageProps}/>
-          <Component {...pageProps}/>
-          <Sidebar {...pageProps}/>
-          <FooterContainer/>
-        </RouterContextProvider>
-      </AuthContextProvider>
-    </SafeHydrate>
+    <>
+      <SafeHydrate>
+        <AuthContextProvider token={token}>
+          <RouterContextProvider {...pageProps}>
+            <Head>
+              <title>{SITE_NAME} {title}</title>
+            </Head>
+            <Header {...pageProps}/>
+            <Component {...pageProps}/>
+            <Sidebar {...pageProps}/>
+            <FooterContainer/>
+
+          </RouterContextProvider>
+        </AuthContextProvider>
+        <div
+          id="__portal"
+          style={{
+            position: 'absolute',
+            top: '0px',
+            overflow: 'visible',
+          }}
+        />
+      </SafeHydrate>
+    </>
   );
 };
 
